@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -3%;
+}
+
+.title {
+    font-size: 100px;
+}
+
+.pokeImg {
+    border-radius: 100%;
+}
+

@@ -1,13 +1,12 @@
 const router = require('express').Router();
 const { Pokemon } = require('../db.js');
 const axios = require('axios');
-const e = require('express');
 
 let todasLasPromesas = [];
 let apiData = [];
 let newArr = [];
 (function promiseMaker () {
-    for (let i = 1; i <= 40; i++) {
+    for (let i = 1; i <= 42; i++) {
         todasLasPromesas.push(async () => {
             await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`)
                 .then(data => {
@@ -20,36 +19,49 @@ let newArr = [];
     }
 })()
 
-Promise.all([todasLasPromesas[0](), todasLasPromesas[1](), todasLasPromesas[2]()])
+Promise.all(todasLasPromesas.map(p => { return p() }))
     .then(resultado => {
     return resultado;
 })  .catch( err => {
-    console.log(err); 
+    console.log(err);
 });
 
-let dataCatcher = async function () {
-    setTimeout(() => {
-        for (let i = 0; i < newArr.length; i++) {
-            console.log('Nombre ',newArr[i].data.forms[0].name)
-            console.log('Tipo',newArr[i].data.types[0].type.name)
-            console.log('Altura',newArr[i].data.height)
-            console.log('Peso',newArr[i].data.weight)
-        }
-    }, 1000);
-}
-dataCatcher()
-// console.log(apiData)
-router.get('/', async function (req, res) {
-    
-    const pokemonNames = await Pokemon.findAll();
+(async function dataCatcher () {
     try {
-        if (pokemonNames.length < 40) {
-            
-        } res.json(pokemonNames);
-        // } else {
-        // if (!pokemonNames) return res.status(404);
-        // res.json(pokemonNames);
-        // }    
+        setTimeout(() => {
+            for (let i = 0; i < newArr.length; i++) {
+                apiData.push({
+                    name: newArr[i].data.forms[0].name,
+                    type: newArr[i].data.types[0].type.name,
+                    height: newArr[i].data.height,
+                    weight: newArr[i].data.weight,
+                    imgUrl: newArr[i].data.sprites.other['official-artwork'].front_default
+                })            
+                
+            }
+        }, 2800);
+    } catch (e) {
+        console.log(e)
+    }
+})()
+
+router.get('/', async function (req, res) {    
+    try {
+        
+        const pokemonNames = await Pokemon.findAll({
+            order: [['name', 'ASC']],
+            attributes: ['name', 'id', 'imgUrl', 'type']
+        });
+        setTimeout(() => {
+            for (let i = 0; i < apiData.length; i++) {
+                Pokemon.create({
+                    name: apiData[i].name,
+                    imgUrl: apiData[i].imgUrl,
+                    type: apiData[i].type
+                })
+            }
+        }, 3000);
+        res.json(pokemonNames);
     } catch (e) {
         console.log(e)
     }
