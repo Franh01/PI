@@ -1,38 +1,51 @@
 import { useState } from 'react';
 import s from './PokemonCard.module.css';
+import * as allImages from '../../img/pokeImages'
+
 
 export default function PokemonCard({ name, img, type }) {
-    const poison = '#6E3CBC'
-    const bug = '#064635'
-    const water = '#516BEB'
-    const grass = '#519259'
-    const fire = '#FF5403'
-    const fairy = '#F4BEEE'
-    const normal = '#99A799'
-    const electric = '#FFF323'
-    const ground = '#C3B091'
-
+    const poisonc = '#6E3CBC'
+    const bugc = '#064635'
+    const waterc = '#516BEB'
+    const grassc = '#519259'
+    const firec = '#FF5403'
+    const fairyc = '#F4BEEE'
+    const normalc = '#99A799'
+    const electricc = '#FFF323'
+    const groundc = '#C3B091'    
+    console.log(allImages.default)
 
     const [color, setColor] = useState('gray');
-    if (type === 'poison' && color !== poison) {
-        setColor(poison);
-    } else if (type === 'bug' && color !== bug) {
-        setColor(bug);
-    } else if (type === 'water' && color !== water) {
-        setColor(water);
-    } else if (type === 'grass' && color !== grass) {
-        setColor(grass);
-    } else if (type === 'fire' && color !== fire) {
-        setColor(fire);
-    } else if (type === 'fairy' && color !== fairy) {
-        setColor(fairy);
-    } else if (type === 'normal' && color !== normal) {
-        setColor(normal);
-    } else if (type === 'electric' && color !== electric) {
-        setColor(electric);
-    } else if (type === 'ground' && color !== ground) {
-        setColor(ground);
+    const [typeImg, setTypeImg] = useState('');
+    if (type === 'poison' && color !== poisonc) {
+        setColor(poisonc);
+        setTypeImg(allImages.default.poison)
+    } else if (type === 'bug' && color !== bugc) {
+        setColor(bugc);
+        setTypeImg(allImages.default.bug)
+    } else if (type === 'water' && color !== waterc) {
+        setColor(waterc);
+        setTypeImg(allImages.default.water)
+    } else if (type === 'grass' && color !== grassc) {
+        setColor(grassc);
+        setTypeImg(allImages.default.grass)
+    } else if (type === 'fire' && color !== firec) {
+        setColor(firec);
+        setTypeImg(allImages.default.fire)
+    } else if (type === 'fairy' && color !== fairyc) {
+        setColor(fairyc);
+        setTypeImg(allImages.default.fairy)
+    } else if (type === 'normal' && color !== normalc) {
+        setColor(normalc);
+        setTypeImg(allImages.default.normal)
+    } else if (type === 'electric' && color !== electricc) {
+        setColor(electricc);
+        setTypeImg(allImages.default.electric)
+    } else if (type === 'ground' && color !== groundc) {
+        setColor(groundc);
+        setTypeImg(allImages.default.ground)
     }
+
     let upperName = name.toUpperCase().slice(0, 1) + name.slice(1, name.length);
     let upperType = type.toUpperCase().slice(0, 1) + type.slice(1, type.length);
     return (
@@ -49,6 +62,7 @@ export default function PokemonCard({ name, img, type }) {
 
                     <div className={s.typeContainer}>
                         <h3>{upperType}</h3>
+                        <img className={s.typeImg} src={typeImg} alt="typeImg"/>
                     </div>
                 </div>
             </div>

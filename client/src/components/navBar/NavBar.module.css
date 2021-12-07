@@ -50,12 +50,25 @@
     border: none;
     cursor: pointer;
     background-color: #ffc600;
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(.2,.42,1,1.11);
 }
 
 .searchButton:hover {
     background-color: #e90a0a;
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(0,1.08,1,.89);
 }
 
 .searchIcon {
     max-width: 30px;
 }
+
+/* transition-duration: .5s;
+transition-timing-function: cubic-bezier(.2,.42,1,1.11);
+}
+
+.pokeImg:hover{
+background-color: #ff1a1a;
+transition-duration: .5s;
+transition-timing-function: cubic-bezier(.4,0,.2,1); */
