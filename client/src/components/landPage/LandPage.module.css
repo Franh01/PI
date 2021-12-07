@@ -10,6 +10,18 @@
 }
 
 .pokeImg {
-    border-radius: 100%;
+    /* border-radius: 100%; */
+    background-color: white;
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(.2,.42,1,1.11);
 }
 
+.pokeImg:hover{
+    background-color: #ff1a1a;
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+}
+
+.pokeImg:focus{
+    outline: hidden;
+}

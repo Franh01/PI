@@ -2,7 +2,7 @@ import s from './LandPage.module.css';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getPokemons } from '../../redux/actions/pokemon';
-import pokeballImg from '../../img/pokeball.png'
+import pokeballImg from '../../img/pokeballreddot.png'
 
 
 export default function Pokemons(name) {
