@@ -6,10 +6,11 @@
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
-    padding: 10px 0px 5px 0px;
+    padding: 5px 0px 5px 0px;
     z-index: 21031;
     top: 0;
-    border-bottom: 7px solid red;
+    /* border-bottom: 7px solid rgb(255, 0, 0, 70%); */
+    border-bottom: 7px solid rgb(255,206,69);
     align-items: center;
 }
 
