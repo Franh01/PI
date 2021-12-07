@@ -18,8 +18,44 @@ export default function NavBar() {
             <div className={s.navComp}>Add Pokemon</div>
 
             <div className={s.filters}>
-                <div className={s.navComp}>Filtro1</div>
-                <div className={s.navComp}>Filtro2</div>
+                <div className={s.navComp}>
+                    <select>
+                        <option selected value='Conectar a use state'>Todos</option>
+                        <option>Bug</option>
+                        <option>Dark</option>
+                        <option>Dragon</option>
+                        <option>Electric</option>
+                        <option>Fairy</option>
+                        <option>Fighting</option>
+                        <option>Fire</option>
+                        <option>Flying</option>
+                        <option>Ghost</option>
+                        <option>Grass</option>
+                        <option>Ground</option>
+                        <option>Ice</option>
+                        <option>Normal</option>
+                        <option>Poison</option>
+                        <option>Psychic</option>
+                        <option>Rock</option>
+                        <option>Steel</option>
+                        <option>Water</option>
+                    </select>
+                    <button>Aplicar</button>
+                </div>
+
+                <div className={s.navComp}>
+                    <select>
+                        <option selected>---</option>
+                        <option>Nombre</option>
+                        <option>Fuerza</option>
+                    </select>
+                    <select>
+                        <option selected>---</option>
+                        <option>ASC</option>
+                        <option>DESC</option>
+                    </select>
+                    <button>Aplicar</button>
+                </div>
             </div>
             
         </div>
