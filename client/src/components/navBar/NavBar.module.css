@@ -1,0 +1,60 @@
+
+.navBarContainer {
+    background-color: rgb(251, 251, 251, 98%);
+    display: flex;
+    position: fixed;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 0px 5px 0px;
+    z-index: 21031;
+    top: 0;
+    border-bottom: 7px solid red;
+    align-items: center;
+}
+
+.navComp{
+    padding: 0px 20px;
+}
+
+.homeAndSearch{
+    display: inherit;
+    align-items: center;
+}
+
+.filters{
+    display: inherit;
+}
+
+.homeImg{
+    max-height: 50px;
+    background-color: rgb(251, 251, 251, 98%);
+}
+
+.searchBar{
+    padding: 10px 10px;
+    border-radius: 10px 0px 0px 10px;
+    border: none;
+    background-color: rgb(235 235 235);
+}
+
+.searchBar:focus{
+    outline: none;
+}
+
+.searchButton{
+    min-height: 35.12px;
+    position: absolute;
+    border-radius: 0px 10px 10px 0px;
+    border: none;
+    cursor: pointer;
+    background-color: #ffc600;
+}
+
+.searchButton:hover {
+    background-color: #e90a0a;
+}
+
+.searchIcon {
+    max-width: 30px;
+}

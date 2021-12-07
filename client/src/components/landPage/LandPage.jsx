@@ -5,7 +5,7 @@ import { getPokemons } from '../../redux/actions/pokemon';
 import pokeballImg from '../../img/pokeballreddot.png'
 
 
-export default function Pokemons(name) {
+export default function Pokemons() {
     const dispatch = useDispatch();
     setTimeout(() => {
         dispatch(getPokemons())

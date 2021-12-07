@@ -3,6 +3,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
+    margin-top: 3%;
 }
 
 .pokegif {
@@ -17,3 +18,4 @@
     left: 40%;
     top: 10%;
 }
+
