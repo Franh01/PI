@@ -64,11 +64,6 @@
     max-width: 30px;
 }
 
-/* transition-duration: .5s;
-transition-timing-function: cubic-bezier(.2,.42,1,1.11);
+.fonting {
+    font-family: inherit;
 }
-
-.pokeImg:hover{
-background-color: #ff1a1a;
-transition-duration: .5s;
-transition-timing-function: cubic-bezier(.4,0,.2,1); */

@@ -7,12 +7,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius: 10px;
+    border-radius: 16px;
     box-shadow: inset 0 -3em 3em rgb(0 0 0 / 20%), 0 0 0 2px rgb(255 255 255 / 0%), 0.3em 0.3em 1em rgb(0 0 0 / 29%);
     transition-duration: .5s;
     transition-timing-function: cubic-bezier(.2,.42,1,1.11);
     cursor: pointer;
+    -webkit-user-select: none;
     user-select: none;
+    
 }
 
 .card:hover {
@@ -48,3 +50,5 @@
     max-width: 90px;
     margin-top: -30px;
 }
+
+

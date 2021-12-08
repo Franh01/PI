@@ -14,15 +14,3 @@ export const getPokemons = () => {
             })
     }
 }
-// export const getPokemons = () => {
-//     return (dispatch) => {
-//         axios.get('http://localhost:3001/')
-//             .then(r => r.data)
-//             .then(data => {
-//                 dispatch({
-//                     type: GET_POKEMONS,
-//                     payload: data
-//                 })
-//             })
-//     }
-// }

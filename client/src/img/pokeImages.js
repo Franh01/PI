@@ -17,7 +17,7 @@ import rock from './rock.png';
 import steel from './steel.png';
 import water from './water.png';
 
-export default ({
+const pokeImgs = {
     bug,
     dark,
     dragon,
@@ -36,6 +36,8 @@ export default ({
     rock,
     steel,
     water
-});
+};
+
+export default pokeImgs;
 
 

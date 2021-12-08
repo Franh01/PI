@@ -7,7 +7,7 @@ export default function NavBar() {
     return (
         <div className={s.navBarContainer}>
             <div className={s.homeAndSearch}>
-                <div className={s.navComp}><Link to='/'><img className={s.homeImg} src={homeImg} alt='home image' /></Link></div>
+                <div className={s.navComp}><Link to='/'><img className={s.homeImg} src={homeImg} alt='homebtn' /></Link></div>
                 
                 <div className={s.navComp}>
                     <input type="text" className={s.searchBar} placeholder='Ej: Pikachu...' />
@@ -15,12 +15,12 @@ export default function NavBar() {
                 </div>
             </div>
             
-            <div className={s.navComp}>Add Pokemon</div>
+            <div className={s.navComp}><Link to='createpokemon'><button className={s.fonting}>Add Pokemon</button></Link></div>
 
             <div className={s.filters}>
                 <div className={s.navComp}>
-                    <select>
-                        <option selected value='Conectar a use state'>Todos</option>
+                    <select className={s.fonting}>
+                        <option defaultValue value='Conectar a use state'>Todos</option>
                         <option>Bug</option>
                         <option>Dark</option>
                         <option>Dragon</option>
@@ -40,21 +40,21 @@ export default function NavBar() {
                         <option>Steel</option>
                         <option>Water</option>
                     </select>
-                    <button>Aplicar</button>
+                    <button className={s.fonting}>Aplicar</button>
                 </div>
 
                 <div className={s.navComp}>
-                    <select>
-                        <option selected>---</option>
+                    <select className={s.fonting}>
+                        <option defaultValue>---</option>
                         <option>Nombre</option>
                         <option>Fuerza</option>
                     </select>
-                    <select>
-                        <option selected>---</option>
+                    <select className={s.fonting}>
+                        <option defaultValue>---</option>
                         <option>ASC</option>
                         <option>DESC</option>
                     </select>
-                    <button>Aplicar</button>
+                    <button className={s.fonting}>Aplicar</button>
                 </div>
             </div>
             

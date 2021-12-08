@@ -11,7 +11,6 @@ export default function Pokemons() {
     const pokemons = useSelector((state) => state.pokemonReducer.pokemons);
 
     useEffect(() => {
-        console.log(pokemons)
         dispatch(getPokemons())
     }, [])
 
@@ -32,8 +31,8 @@ export default function Pokemons() {
                     :
                     pokemons.map(p => (
                         
-                    <PokemonCard
-                        key={p.id}
+                        <PokemonCard
+                        key={p.pokemonId}
                         name={p.name}
                         img={p.imgUrl}
                         type={p.type}

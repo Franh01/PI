@@ -8,7 +8,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   /* background-color: #FFCE45; */
   background: rgb(255,206,69);
-background: radial-gradient(circle, rgba(255,206,69,1) 75%, rgba(255,69,23,0.7651435574229692) 100%);
+  background: radial-gradient(circle, rgba(255,206,69,1) 75%, rgba(255,69,23,0.7651435574229692) 100%);
+  color: white;
 }
 
 code {

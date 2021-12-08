@@ -1,19 +1,19 @@
 import { useState } from 'react';
 import s from './PokemonCard.module.css';
 import * as allImages from '../../img/pokeImages'
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
-
-export default function PokemonCard({ name, img, type }) {
+export default function PokemonCard({ name, img, type}) {
     const poisonc = '#6E3CBC'
-    const bugc = '#064635'
+    const bugc = '#3c9950'
     const waterc = '#516BEB'
-    const grassc = '#519259'
+    const grassc = '#27cb50'
     const firec = '#FF5403'
-    const fairyc = '#F4BEEE'
-    const normalc = '#99A799'
-    const electricc = '#FFF323'
-    const groundc = '#C3B091'    
-    console.log(allImages.default)
+    const fairyc = '#961a45'
+    const normalc = '#ca98a6'
+    const electricc = '#e2e32b'
+    const groundc = '#a8702d'
 
     const [color, setColor] = useState('gray');
     const [typeImg, setTypeImg] = useState('');
@@ -48,24 +48,34 @@ export default function PokemonCard({ name, img, type }) {
 
     let upperName = name.toUpperCase().slice(0, 1) + name.slice(1, name.length);
     let upperType = type.toUpperCase().slice(0, 1) + type.slice(1, type.length);
+
     return (
-        <div>
-            <div className={s.card} style={{background: color}}>
-                <div className={s.content}>
-                    <div className={s.nameContainer}>
-                        <h2>{upperName}</h2>
-                    </div>
+            <Link style={{textDecoration: 'none', color: 'white'}} to={`/pokemons/${name}`}>
+                <div>
+                    <div className={s.card} style={
+                        {
+                            background: color,
+                            border: '5px solid',
+                            borderImageSlice: '1',
+                            borderWidth: '10px',
+                            borderImageSource: `radial-gradient(circle, ${color}7f 75%, ${color} 100%)`
+                        }}>
+                        <div className={s.content}>
+                            <div className={s.nameContainer}>
+                                <h2>{upperName}</h2>                        
+                            </div>
 
-                    <div className={s.imgContainer}>
-                        <img className={s.image} src={img} />
-                    </div>
+                            <div className={s.imgContainer}>
+                                <img className={s.image} src={img} alt={name}/>
+                            </div>
 
-                    <div className={s.typeContainer}>
-                        <h3>{upperType}</h3>
-                        <img className={s.typeImg} src={typeImg} alt="typeImg"/>
+                            <div className={s.typeContainer}>
+                                <h3>{upperType}</h3>
+                                <img className={s.typeImg} src={typeImg} alt="typeImg"/>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </Link>
     )
 };
