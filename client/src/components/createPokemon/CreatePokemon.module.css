@@ -18,7 +18,7 @@
 .form {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
 }
 
 .inputs {
@@ -52,6 +52,8 @@ inputs:focus {
 }
 
 .formBtnContainer {
+    display: flex;
+    justify-content: center;
     margin: 10px 0px -10px 0px;
 }
 
@@ -74,26 +76,77 @@ inputs:focus {
     transition-duration: .5s;
 }
 
-.titles {
-    margin: 0px 0px;
+.type {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
 }
 
 .fonting {
     font-family: inherit;
 }
 
+.pokemonTypes{
+    margin: 10px 0px 0px 0px;
+    padding: 6px 9px;
+    font-family: inherit;
+    min-width: 410px;
+    border: none;
+    border-radius: 5px;
+}
+
+.pokemonTypes:focus{
+    outline: none;
+    border: none;
+}
+
+
+
 
 
 @media only screen and (max-width: 768px) {
+    .stats{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .form {
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+    }
+    .pokemonTypes{
+        min-width: 100%;
+        /* max-width: 100%; */
+    }
+    .typesContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .formContainer{
+        width: 79%;
+    }
     .inputs {
-        width: 100%;
+        width: auto;
     }    
     .inputContent {
         width: 100%;
     }
-    .formContainer{
+    .pokemonTypes{
         width: 100%;
-        margin: 100px 0px 0px 0px;
+    }
+    .nameContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .imgContainer{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 }
 

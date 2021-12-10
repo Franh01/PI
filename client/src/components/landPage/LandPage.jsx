@@ -1,7 +1,7 @@
 import s from './LandPage.module.css';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getPokemons } from '../../redux/actions/pokemon';
+import { getPokemons, getTypes } from '../../redux/actions/pokemon';
 import pokeballImg from '../../img/pokeballreddot.png'
 
 
@@ -9,6 +9,7 @@ export default function Pokemons() {
     const dispatch = useDispatch();
     setTimeout(() => {
         dispatch(getPokemons())
+        dispatch(getTypes())
     }, 3500);
     function handleOnClick() {
         dispatch(getPokemons());

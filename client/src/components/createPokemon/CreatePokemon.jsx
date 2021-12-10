@@ -1,88 +1,121 @@
 import { useState } from 'react';
+import { Link, useNavigate} from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { createPokemon, getTypes } from '../../redux/actions/pokemon';
 import s from './CreatePokemon.module.css';
 
 export default function CreatePokemon() {
+    const tipos = useSelector((state) => state.pokemonReducer.types.map(t => t.name));
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    if (tipos.length === 0) {
+        dispatch(getTypes())
+    };
+    
     const [name, setName] = useState('');
-    // const [title, setTitle] = useState('');
-    const [url, setUrl] = useState('');
-    const [stats, setStats] = useState({
-        vida: '',
-        fuerza: '',
-        defensa: '',
-        velocidad: '',
-        altura: '',
-        peso: ''
-    });
-    console.log(stats)
+    const [hp, setHp] = useState('');
+    const [strength, setStrength] = useState('');
+    const [defense, setDefense] = useState('');
+    const [speed, setSpeed] = useState('');
+    const [height, setHeight] = useState('');
+    const [weight, setWeight] = useState('');
+    const [imgUrl, setImgUrl] = useState('');
+    const [type1, setType1] = useState('normal');
+    const [type2, setType2] = useState('none');
+    let makeItem = function(x) {
+        return <option key={x}>{x}</option>;
+    };
+
+    function handleOnSubmit() {
+        if (name && hp && strength && defense && speed && height && weight && type1 && !hp.includes('e') && !strength.includes('e') && !defense.includes('e') && !speed.includes('e') && !height.includes('e') && !weight.includes('e')) {
+            if (type2 === 'none') {
+                dispatch(createPokemon({
+                    name: name,
+                    hp: hp,
+                    strength: strength,
+                    defense: defense,
+                    speed: speed,
+                    height: height,
+                    weight: weight,
+                    imgUrl: imgUrl,
+                    type: [type1]
+                }))
+            } else {
+                dispatch(createPokemon({
+                    name: name,
+                    hp: hp,
+                    strength: strength,
+                    defense: defense,
+                    speed: speed,
+                    height: height,
+                    weight: weight,
+                    imgUrl: imgUrl,
+                    type: [type1, type2]
+                }))
+            }
+            alert(`Tu pokemon ${name} fue creado con exito!`)
+            navigate('/pokemons')
+        } else {
+            alert('Debes introducir parametros validos!')
+        }
+    }
+    
+    
+
     return (
         <div className={s.container}>
             <div className={s.formContainer}>
                 <form className={s.form}>
-                    <div>
+
+                    <div className={s.nameContainer}>
                         <h4 className={s.titles}>Nombre:</h4>
-                        <input className={s.inputs} type='text' placeholder='' required value={name} onChange={e => {
+                        <input className={s.inputs} type='text' placeholder='Pikachu...' required value={name} onChange={e => {
                             setName(e.target.value)
                         }}></input>
                     </div>
-                    <div>
-                        <h4 className={s.titles}>Tipo/s:</h4>
-                        <select className={s.fonting}>
-                            <option disabled defaultValue>Tipos</option> {/* conectal al state */}
-                            <option>Bug</option>
-                            <option>Dark</option>
-                            <option>Dragon</option>
-                            <option>Electric</option>
-                            <option>Fairy</option>
-                            <option>Fighting</option>
-                            <option>Fire</option>
-                            <option>Flying</option>
-                            <option>Ghost</option>
-                            <option>Grass</option>
-                            <option>Ground</option>
-                            <option>Ice</option>
-                            <option>Normal</option>
-                            <option>Poison</option>
-                            <option>Psychic</option>
-                            <option>Rock</option>
-                            <option>Steel</option>
-                            <option>Water</option>
+
+                    <div className={s.typesContainer}>
+                        <h4 className={s.type}>Tipo principal:</h4>
+                        <select className={s.pokemonTypes} value={type1} multiple={false} onChange={e => { setType1(e.target.value) }}>
+                            {tipos.map(makeItem)}
+                        </select>
+                        <h4 className={s.type}>Tipo secundario:</h4>
+                        <select className={s.pokemonTypes} value={type2} multiple={false} onChange={e => {setType2(e.target.value)}}>
+                            <option defaultValue>none</option>
+                            {tipos.map(makeItem)}
                         </select>
                     </div>
-                    <div>
-                        <h4 className={s.titles}>Imagen:</h4>
-                        <input className={s.inputs} type='text' placeholder='' value={url} onChange={e => {
-                            setUrl(e.target.value)
+
+                    <div className={s.imgContainer}>
+                        <h4 className={s.titles}>Imagen(opcional):</h4>
+                        <input className={s.inputs} type='text' placeholder='Img url...' value={imgUrl} onChange={e => {
+                            setImgUrl(e.target.value)
                         }}></input>
                     </div>
-                    <div>
-                        <h4 className={s.titles}>Id:</h4>
-                        <input className={s.inputs} type='text' placeholder='' value={url} onChange={e => {
-                            setUrl(e.target.value)
+                    
+                    <div className={s.stats}>
+                        <h4 className={s.type}>Estadísticas(numericas):</h4>
+                        <input className={s.inputs} type='number' placeholder='Vida...' value={hp} onChange={e => {
+                            setHp(e.target.value)
                         }}></input>
-                    </div>
-                    <div>
-                        <h4 className={s.titles}>Estadísticas:</h4>
-                        <input className={s.inputs} type='text' placeholder='Vida...' value={stats.vida} onChange={e => {
-                            setStats({...stats, ['vida']: e.target.value})
+                        <input className={s.inputs} type='number' placeholder='Fuerza...' value={strength} onChange={e => {
+                            setStrength(e.target.value)
                         }}></input>
-                        <input className={s.inputs} type='text' placeholder='Fuerza...' value={stats.fuerza} onChange={e => {
-                            setStats({...stats, ['fuerza']: e.target.value})
+                        <input className={s.inputs} type='number' placeholder='Defensa...' value={defense} onChange={e => {
+                            setDefense(e.target.value)
                         }}></input>
-                        <input className={s.inputs} type='text' placeholder='Defensa...' value={stats.defensa} onChange={e => {
-                            setStats({...stats, ['defensa']: e.target.value})
+                        <input className={s.inputs} type='number' placeholder='Velocidad...' value={speed} onChange={e => {
+                            setSpeed(e.target.value)
                         }}></input>
-                        <input className={s.inputs} type='text' placeholder='Velocidad...' value={stats.velocidad} onChange={e => {
-                            setStats({...stats, ['velocidad']: e.target.value})
+                        <input className={s.inputs} type='number' placeholder='Altura...' value={height} onChange={e => {
+                            setHeight(e.target.value)
                         }}></input>
-                        <input className={s.inputs} type='text' placeholder='Altura...' value={stats.altura} onChange={e => {
-                            setStats({...stats, ['altura']: e.target.value})
-                        }}></input>
-                        <input className={s.inputs} type='text' placeholder='Peso...' value={stats.peso} onChange={e => {
-                            setStats({...stats, ['peso']: e.target.value})
+                        <input className={s.inputs} type='number' placeholder='Peso...' value={weight} onChange={e => {
+                            setWeight(e.target.value)
                         }}></input>
                     </div>
                     <div className={s.formBtnContainer}>
-                        <button className={s.formBtn} type='submit' /* onClick={handleOnClick} */>Crear</button>
+                        <button className={s.formBtn} type='submit' onClick={handleOnSubmit}>Crear</button>
                     </div>
                 </form>
             </div>
