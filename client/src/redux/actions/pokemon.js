@@ -1,5 +1,5 @@
 //Actions
-import { CREATE_POKEMON, GET_POKEMONS, GET_TYPES } from './actionTypes';
+import { CREATE_POKEMON, GET_POKEMONS, GET_TYPES, GET_POKEMON_BY_NAME } from './actionTypes';
 import axios from 'axios';
 
 export const getPokemons = () => {
@@ -12,6 +12,13 @@ export const getPokemons = () => {
                     payload: data
                 })
             })
+    }
+}
+
+export const getPokemonByName = (data) => {
+    return {
+        type: GET_POKEMON_BY_NAME,
+        payload: data
     }
 }
 

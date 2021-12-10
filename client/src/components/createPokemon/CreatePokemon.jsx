@@ -1,8 +1,8 @@
+import s from './CreatePokemon.module.css';
 import { useState } from 'react';
-import { Link, useNavigate} from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { createPokemon, getTypes } from '../../redux/actions/pokemon';
-import s from './CreatePokemon.module.css';
 
 export default function CreatePokemon() {
     const tipos = useSelector((state) => state.pokemonReducer.types.map(t => t.name));

@@ -13,7 +13,6 @@ export default function Pokemons() {
     useEffect(() => {
         dispatch(getPokemons())
     }, [])
-    
     return (
         <div>
             <div className={s.navBarContainer}>

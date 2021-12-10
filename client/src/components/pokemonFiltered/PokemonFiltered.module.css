@@ -1,0 +1,117 @@
+.divMain{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card {
+    padding: 10px 5px;
+    min-height: 400px;
+    min-width: 1000px;
+    max-width: 800px;
+    margin: 50px 50px;
+    transition-timing-function: cubic-bezier(.2,.42,1,1.11);
+    box-shadow: inset 0 -3em 3em rgb(0 0 0 / 20%), 0 0 0 2px rgb(255 255 255 / 0%), 0.3em 0.3em 1em rgb(0 0 0 / 59%);
+}
+
+.image {
+    max-width: 100%;
+    filter: drop-shadow(20px 10px 8px #000) saturate(2);
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(.2,.42,1,1.11);
+}
+
+.image:hover {
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(0,1.08,1,.89);
+    transform: scale(1.03);
+}
+
+.imgContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.nameContainer {
+    border-bottom: 1px solid #000;
+    margin: 0 338px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(.2,.42,1,1.11);
+}
+
+.nameContainer:hover {
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(0,1.08,1,.89);
+    transform: scale(1.03);
+}
+
+.typeContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-right: 10px;
+}
+
+.typeImg{
+    max-width: 90px;
+    margin-top: -30px;
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(.2,.42,1,1.11);
+}
+.typeImg:hover {
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(0,1.08,1,.89);
+    transform: scale(1.03);
+}
+
+.dimensionesText{    
+    margin: 50px 0px;
+    padding: 0px 14px;
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(.2,.42,1,1.11);
+}
+.dimensionesText:hover{
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(0,1.08,1,.89);
+    transform: scale(1.03);
+}
+
+.atributosText{
+    margin: 50px 0px;
+    padding: 0px 14px;
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(.2,.42,1,1.11);
+}
+.atributosText:hover {
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(0,1.08,1,.89);
+    transform: scale(1.03);
+}
+.homeButton{
+    margin: 13px 17px;
+    border: none;
+    border-radius: 10px;
+    padding: 0px 15px;
+    font-size: 10px;
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(.2,.42,1,1.11);
+    cursor: pointer;
+    color: white;
+    box-shadow: inset 0 -3em 3em rgb(0 0 0 / 20%), 0 0 0 2px rgb(255 255 255 / 0%), 0.3em 0.3em 1em rgb(0 0 0 / 59%);
+}
+.homeButton:hover{
+    transform: scale(1.02);
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(0,1.08,1,.89);
+    
+    box-shadow: inset 0 -3em 3em rgb(0 0 0 / 40%), 0 0 0 2px rgb(255 255 255 / 0%), 0.3em 0.3em 1em rgb(0 0 0 / 79%);
+}
+.homeButton:focus{
+    border: none;
+    outline: none;
+}
+

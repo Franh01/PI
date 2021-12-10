@@ -59,23 +59,46 @@ const getApiInfo = async () => {
 }
 setTimeout(() => {
     getApiInfo()
-}, 500);
+}, 2000);
 
 
 router.get('/pokemons', async function (req, res) {
-    try {
-        const pokemonNames = await Pokemon.findAll({
-            // order: [['name', 'ASC']],
-            // attributes: ['name', 'pokemonId', 'imgUrl', 'height', 'weight', 'hp', 'strength', 'defense', 'speed', 'type']
-            include: {
-                model: Tipo
-            }
-        });
-        
-        res.json(pokemonNames);
-    } catch (e) {
-        console.log(e)
+    const { name } = req.body;
+    if (name) {
+        try {
+            const pokemonSearch = await Pokemon.findOne({ where: { name: name } });
+            res.json(pokemonSearch).status(200);
+        } catch (e) {
+            console.log(e)
+            res.sendStatus(404)
+        }
+    } else {
+        try {
+            const pokemonNames = await Pokemon.findAll({
+                // order: [['name', 'ASC']],
+                // attributes: ['name', 'pokemonId', 'imgUrl', 'height', 'weight', 'hp', 'strength', 'defense', 'speed', 'type']
+                include: {
+                    model: Tipo
+                }
+            });
+            
+            res.json(pokemonNames);
+        } catch (e) {
+            console.log(e)
+        }
     }
+});
+
+router.get('/pokemons/:name', async function (req, res) {
+    const { name } = req.params;
+    
+        try {
+            const pokemonSearch = await Pokemon.findOne({ where: { name: name } });
+            res.json(pokemonSearch).status(200);
+        } catch (e) {
+            console.log(e)
+            res.sendStatus(404)
+        }
 });
 
 router.post('/pokemons', async function (req, res) {
@@ -98,5 +121,20 @@ router.post('/pokemons', async function (req, res) {
         res.sendStatus(500)
     }
 });
+
+router.delete('/pokemons/:name', async function (req, res) {
+    const { name } = req.params;
+    try {
+        const destroyPokemon = await Pokemon.destroy({
+            where: {
+                name: name
+            }
+        })
+        res.json(destroyPokemon).sendStatus(200)
+    } catch (e) {
+        console.log(e)
+        res.sendStatus(404)
+    }
+})
 
 module.exports = router;

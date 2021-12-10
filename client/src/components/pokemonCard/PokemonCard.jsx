@@ -1,16 +1,19 @@
 import { useState } from 'react';
 import s from './PokemonCard.module.css';
 import * as allImages from '../../img/pokeImages'
-import { Link } from 'react-router-dom';
-// import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { getPokemonByName } from '../../redux/actions/pokemon';
 
 export default function PokemonCard({ name, img, type }) {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const bugC = '#3c9950';
     const darkC = '#040707';
     const dragonC = '#6fa8dc';
     const electricC = '#e2e32b';
     const fairyC = '#ff3e81';
-    const fightingC = '#d5930e';
+    const fightingC = '#994025';
     const fireC = '#FF5403';
     const flyingC = '#ffe9e9';
     const ghostC = '#5731b9';
@@ -67,7 +70,7 @@ export default function PokemonCard({ name, img, type }) {
             setTypeImg(allImages.default.flying)
         } else if (type[0] === 'fighting' && color !== fightingC) {
             setColor(fightingC);
-            setTypeImg(allImages.default.flying)
+            setTypeImg(allImages.default.fighting)
         } else if (type[0] === 'ghost' && color !== ghostC) {
             setColor(ghostC);
             setTypeImg(allImages.default.flying)
@@ -87,8 +90,15 @@ export default function PokemonCard({ name, img, type }) {
     let upperName = name.toUpperCase().slice(0, 1) + name.slice(1, name.length);
     let upperType = type[0].toUpperCase().slice(0, 1) + type[0].slice(1, type[0].length);
 
+    function handleOnClick() {
+        dispatch(getPokemonByName(name));
+        setTimeout(() => {
+            navigate(`/pokemons/${name}`)
+        }, 200);
+    }
+
     return (
-            <Link style={{textDecoration: 'none', color: 'white'}} to={`/pokemons/${name}`}>
+        <div onClick={()=>handleOnClick()}>
             {img ?                
                     <div>
                         <div className={s.card} style={
@@ -143,6 +153,6 @@ export default function PokemonCard({ name, img, type }) {
                             </div>
                         </div>
                     </div>}
-            </Link>
+                </div>
     )
 };
