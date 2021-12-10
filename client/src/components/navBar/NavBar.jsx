@@ -8,7 +8,9 @@ import { useState } from 'react';
 
 export default function NavBar() {
     const tipos = useSelector((state) => state.pokemonReducer.types.map(t => t.name));
-    // const pokemonFiltrado = useSelector((state) => state.pokemonReducer.pokemonFiltered);
+    const pokemonNames = useSelector((state) => state.pokemonReducer.pokemons.map(p => p.name));
+    console.log(pokemonNames)
+
     // console.log(pokemonFiltrado);
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -20,8 +22,14 @@ export default function NavBar() {
     };
     const [name, setName] = useState('');
     function handleOnSearch() {
-        dispatch(getPokemonByName(name));
-        navigate(`/pokemons/${name}`)
+        if (pokemonNames.find(p=>p === name)) {
+            dispatch(getPokemonByName(name));
+            navigate(`/pokemons/${name}`)
+            console.log(true)
+        } else {
+            setName('')
+            return alert(`El pokemon con el nombre ${name} no fue encontrado`)
+        }
     }
     // const urlParam = window.location.href.toString().slice(31);
     // if (urlParam.length > 0 && pokemonFiltrado !== 'none') {
