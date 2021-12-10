@@ -148,7 +148,7 @@ export default function PokemonFiltered() {
         
         
         <div className={s.realMain}>
-            <Link to='/pokomons'><button className={s.homeButton} style={{
+            <Link to='/pokemons'><button className={s.homeButton} style={{
                 background: `${color}`,
                 background: `linear-gradient(149deg, ${color} 26%, #000000 100%)`
             }}><h1>{'Home'}</h1></button></Link>
@@ -179,10 +179,10 @@ export default function PokemonFiltered() {
 
                                 <div className={s.atributosText}>
                                     <h3>Atributos:</h3>
-                                    <h4 style={{color: 'red'}}>Vida: {pokemonFiltrado.hp}</h4>
-                                    <h4 style={{color: '#878787'}}>Ataque: {pokemonFiltrado.strength}</h4>
-                                    <h4 style={{color: '#a97230'}}>Defensa: {pokemonFiltrado.defense}</h4>
-                                    <h4 style={{color: '#feff1d'}}>Velocidad: {pokemonFiltrado.speed}</h4>
+                                    <h4>Vida: {pokemonFiltrado.hp}</h4>
+                                    <h4>Ataque: {pokemonFiltrado.strength}</h4>
+                                    <h4>Defensa: {pokemonFiltrado.defense}</h4>
+                                    <h4>Velocidad: {pokemonFiltrado.speed}</h4>
                             </div>
                             <div></div>
                             <div></div>
