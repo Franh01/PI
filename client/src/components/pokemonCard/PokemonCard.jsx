@@ -4,6 +4,7 @@ import * as allImages from '../../img/pokeImages'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getPokemonByName } from '../../redux/actions/pokemon';
+import defaultImg from '../../img/questionMark.png';
 
 export default function PokemonCard({ name, img, type }) {
     const navigate = useNavigate();
@@ -96,7 +97,9 @@ export default function PokemonCard({ name, img, type }) {
             navigate(`/pokemons/${name}`)
         }, 200);
     }
-
+    function addDefaultImg(e){
+        e.target.src = defaultImg;
+    }
     return (
         <div onClick={()=>handleOnClick()}>
             {img ?                
@@ -115,7 +118,8 @@ export default function PokemonCard({ name, img, type }) {
                                 </div>
 
                                 <div className={s.imgContainer}>
-                                    <img className={s.image} src={img} alt={name}/>
+                                <img className={s.image} src={img} alt={name}
+                                    onError={(e) => addDefaultImg(e)}/>
                                 </div>
 
                                 <div className={s.typeContainer}>
@@ -143,7 +147,7 @@ export default function PokemonCard({ name, img, type }) {
                                 </div>
                                 
                                 <div className={s.imgContainer}>
-                                    
+                                    <img className={s.image} src={defaultImg} alt={name}/>
                                 </div>
 
                                 <div className={s.typeContainer}>

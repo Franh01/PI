@@ -3,10 +3,10 @@ import s from './PokemonFiltered.module.css';
 import * as allImages from '../../img/pokeImages'
 import { useDispatch, useSelector } from 'react-redux';
 import { getPokemons } from '../../redux/actions/pokemon';
-import { Link } from 'react-router-dom';
+import defaultImg from '../../img/questionMark.png';
+import NavBar from '../navBar/NavBar';
 
 export default function PokemonFiltered() {
-    // const urlParam = window.location.href.toString().slice(31)
     const pokemons = useSelector((data) => data.pokemonReducer.pokemons)
     const pokemonsFiltered = useSelector((data) => data.pokemonReducer.pokemonFiltered)
     const dispatch = useDispatch()
@@ -138,29 +138,25 @@ export default function PokemonFiltered() {
         }
     
     let upperName = name.toUpperCase().slice(0, 1) + name.slice(1, name.length);
-    let upperType = type[0].toUpperCase().slice(0, 1) + type[0].slice(1, type[0].length);
-    let upperType2 = ''
-    if (type.length > 1) {        
-    let upperType2 = type[1].toUpperCase().slice(0, 1) + type[1].slice(1, type[1].length);
+    
+    function addDefaultImg(e){
+        e.target.src = defaultImg;
     }
 
     return ( 
         
         
         <div className={s.realMain}>
-            <Link to='/pokemons'><button className={s.homeButton} style={{
-                background: `${color}`,
-                background: `linear-gradient(149deg, ${color} 26%, #000000 100%)`
-            }}><h1>{'Home'}</h1></button></Link>
+            <NavBar/>
             <div className={s.divMain}>
                 <div className={s.card} style={
                     {
                         background: `${color}`,
-                        background: `linear-gradient(149deg, ${color} 36%, #000000 100%)`,
+                        background: `linear-gradient(149deg, ${color} 36%, #747474 100%)`,
                         border: '5px solid',
                         borderImageSlice: '1',
                         borderWidth: '10px',
-                        borderImageSource: `radial-gradient(circle, ${color}7f 75%, ${color} 100%)`
+                        borderImageSource: `radial-gradient(circle, ${color}7f 75%, #ffffff 100%)`
                     }}>
                     <div>
                         <div className={s.nameContainer}>
@@ -168,7 +164,7 @@ export default function PokemonFiltered() {
                         </div>
 
                         <div className={s.imgContainer}>
-                            <img className={s.image} src={img} alt={name} />
+                            {img?<img className={s.image} src={img} alt={name} onError={(e) => addDefaultImg(e)}/>:<img className={s.image} src={defaultImg} alt={name} />}
 
                                 <div className={s.dimensionesText}>
                                     <h3>Dimensiones:</h3>
@@ -186,18 +182,6 @@ export default function PokemonFiltered() {
                             </div>
                             <div></div>
                             <div></div>
-                            {/* {type.length === 1 ? 
-                                <div>
-                                    <h3>Tipos:</h3>
-                                    <h4>{upperType}</h4>
-                                </div>
-                                :
-                                <div>
-                                    <h3>Tipos:</h3>
-                                    <h4>{upperType}</h4>
-                                    <h4>{upperType2}</h4>
-                                </div>
-                            } */}
                         </div>
 
                         <div className={s.typeContainer}>

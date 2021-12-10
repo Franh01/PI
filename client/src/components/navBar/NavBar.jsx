@@ -8,6 +8,8 @@ import { useState } from 'react';
 
 export default function NavBar() {
     const tipos = useSelector((state) => state.pokemonReducer.types.map(t => t.name));
+    // const pokemonFiltrado = useSelector((state) => state.pokemonReducer.pokemonFiltered);
+    // console.log(pokemonFiltrado);
     const dispatch = useDispatch()
     const navigate = useNavigate()
     if (tipos.length === 0) {
@@ -21,10 +23,14 @@ export default function NavBar() {
         dispatch(getPokemonByName(name));
         navigate(`/pokemons/${name}`)
     }
+    // const urlParam = window.location.href.toString().slice(31);
+    // if (urlParam.length > 0 && pokemonFiltrado !== 'none') {
+    //     dispatch(getPokemonByName(urlParam))
+    // }
     return (
         <div className={s.navBarContainer}>
             <div className={s.homeAndSearch}>
-                <div className={s.navComp}><Link to='/'><img className={s.homeImg} src={homeImg} alt='homebtn' /></Link></div>
+                <div className={s.navComp}><Link to='/pokemons'><img className={s.homeImg} src={homeImg} alt='homebtn' /></Link></div>
                 
                 <div className={s.navComp}>
                     <input type="text" className={s.searchBar} placeholder='Ej: pikachu...' value={name} onChange={e=>{setName(e.target.value.toLowerCase())}}/>
@@ -32,7 +38,7 @@ export default function NavBar() {
                 </div>
             </div>
             
-            <div className={s.navComp}><Link to='createpokemon'><button className={s.fonting}>Crear Pokemon</button></Link></div>
+            <div className={s.navComp}><Link to='/pokemons/createpokemon'><button className={s.fonting}>Crear Pokemon</button></Link></div>
 
             <div className={s.filters}>
                 <div className={s.navComp}>
