@@ -33,7 +33,30 @@ export default function CreatePokemon() {
             setName('')
             return alert('Solo pudas usar letras en el nombre!')
         }
-        if (name && !hp.includes('e') && !strength.includes('e') && !defense.includes('e') && !speed.includes('e') && !height.includes('e') && !weight.includes('e')) {
+        
+        if (hp.toString().includes('e') || strength.toString().includes('e') || defense.toString().includes('e') || speed.toString().includes('e') || height.toString().includes('e') || weight.toString().includes('e')) {
+            return alert('Debes introducir estadisticas validas')
+        }
+        if (hp === '') {
+            setHp(0)
+            return alert('La vida debe ser al menos 0')
+        } else if (strength === '') {
+            setStrength(0)
+            return alert('La fuerza debe ser al menos 0')
+        } else if (defense === '') {
+            setDefense(0)
+            return alert('La defensa debe ser al menos 0')
+        } else if (speed === '') {
+            setSpeed(0)
+            return alert('La velocidad debe ser al menos 0')
+        } else if (height === '') {
+            setHeight(0)
+            return alert('La altura debe ser al menos 0')
+        } else if (weight === '') {
+            setWeight(0)
+            return alert('El peso debe ser al menos 0')
+        }
+        if (name) {
             if (type2 === 'none') {
                 dispatch(createPokemon({
                     name: name,

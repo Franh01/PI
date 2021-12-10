@@ -156,11 +156,11 @@ export default function PokemonFiltered() {
                         border: '5px solid',
                         borderImageSlice: '1',
                         borderWidth: '10px',
-                        borderImageSource: `radial-gradient(circle, ${color}7f 75%, #ffffff 100%)`
+                        borderImageSource: `radial-gradient(circle, #ffffff 75%, #ffffff 100%)`
                     }}>
                     <div>
                         <div className={s.nameContainer}>
-                            <h2>{upperName}</h2>
+                            <h2 style={{fontSize: '30px'}}>{upperName}</h2>
                         </div>
 
                         <div className={s.imgContainer}>
@@ -187,14 +187,19 @@ export default function PokemonFiltered() {
                         <div className={s.typeContainer}>
                             {
                                 type.length === 1 ?
-                                <div>
-                                    <img className={s.typeImg} src={typeImg} alt={`${type[0]} type`}/>
-                                </div>
+                                    <div>
+                                        <div className={s.toolTip}>
+                                            <h4>{`${type[0]}`}</h4>
+                                        </div>
+                                        
+                                        <img className={s.typeImg} src={typeImg} alt={`${type[0]} type`} />
+                                    </div>
                                     :
-                                <div>
-                                    <img className={s.typeImg} src={typeImg} alt={`${type[0]} type`}/>
-                                    <img className={s.typeImg} src={typeImg1} alt={`${type[1]} type`}/>
-                            </div>}
+                                    <div>
+                                        <img className={s.typeImg} src={typeImg} alt={`${type[0]} type`}/>
+                                        <img className={s.typeImg} src={typeImg1} alt={`${type[1]} type`}/>
+                                    </div>
+                            }
                         </div>
                     </div>
                 </div>

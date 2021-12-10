@@ -48,6 +48,7 @@
 .typeImg{
     max-width: 90px;
     margin-top: -30px;
+    filter: saturate(1.2) contrast(1.1);
 }
 
 
