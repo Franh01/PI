@@ -5,13 +5,18 @@ module.exports = (sequelize) => {
   // defino el modelo  
     sequelize.define('tipo', {
         id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        primaryKey: true
+            type: DataTypes.UUID,
+            allowNull: true,
+            defaultValue: DataTypes.UUIDV4,
+            unique: true
         },
         name: {
-        type: DataTypes.STRING,
-        allowNull: false
+            type: DataTypes.STRING,
+            allowNull: false,
+            primaryKey: true,
+            unique: true
         }
-    });
+    }, {
+        timestamps: false
+        });
 };

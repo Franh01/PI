@@ -13,8 +13,6 @@ export default function Pokemons() {
     useEffect(() => {
         dispatch(getPokemons())
     }, [])
-
-    
     
     return (
         <div>
@@ -23,21 +21,23 @@ export default function Pokemons() {
             </div>
             
             <div className={s.container}>
-                {pokemons.length === 0
-                    ?<div className={s.loading}>
-                        <h1>Cargando...</h1>
-                        <img className={s.pokegif} src={gif} alt="pokegif" />
-                    </div>
-                    :
+                {pokemons.length !== 0
+                    ?
                     pokemons.map(p => (
                         
                         <PokemonCard
-                        key={p.pokemonId}
+                        key={p.id}
                         name={p.name}
                         img={p.imgUrl}
-                        type={p.type}
+                        type={p.tipos.map(p=>p.name)}
                     />
-                    ))}
+                    ))
+                    :
+                    <div className={s.loading}>
+                        <h1>Cargando...</h1>
+                        <img className={s.pokegif} src={gif} alt="pokegif" />
+                    </div>
+                    }
             </div>    
         </div>
     )

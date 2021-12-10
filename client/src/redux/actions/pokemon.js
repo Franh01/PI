@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export const getPokemons = () => {
     return (dispatch) => {
-            axios.get('http://localhost:3001/')
+            axios.get('http://localhost:3001/pokemons')
             .then(r => r.data)
             .then(data => {
                 dispatch({

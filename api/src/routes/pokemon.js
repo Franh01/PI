@@ -2,75 +2,74 @@ const router = require('express').Router();
 const { Pokemon, Tipo } = require('../db.js');
 const axios = require('axios');
 
-let todasLasPromesas = [];
 let apiData = [];
-let typeData = [];
-let newArr = [];
 
-(function promiseMaker () {
-    for (let i = 1; i <= 42; i++) {
-        todasLasPromesas.push(async () => {
-            await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`)
-                .then(data => {
-                    return newArr.push(data)
+const getApiInfo = async () => {
+
+    const apiUrl = 'https://pokeapi.co/api/v2/pokemon?limit=40';
+    await axios.get(apiUrl)
+        .then(data => {
+            apiData.push(data.data.results)
+        })
+        .catch(e => {
+            console.log(e)
+        })
+    const pokemons = apiData[0].map(p => axios.get(p.url))
+
+    const totalPokemons = Promise.all(pokemons)
+        .then(r => {
+            const pokemons = r.map(e => e.data)
+            const resultados = []
+            pokemons.map(e => resultados.push({
+                name: e.name,
+                height: e.height,
+                weight: e.weight,
+                img: e.sprites.other['official-artwork'].front_default,
+                hp: e.stats[0].base_stat,
+                strength: e.stats[1].base_stat,
+                defense: e.stats[2].base_stat,
+                speed: e.stats[5].base_stat,
+                types: e.types.map(t=>t.type.name)
+            }))
+            
+            resultados.map(r => Pokemon.create({
+                name: r.name,
+                height: r.height,
+                weight: r.weight,
+                imgUrl: r.img,
+                hp: r.hp,
+                strength: r.strength,
+                defense: r.defense,
+                speed: r.speed,
+                // types: r.types
+            })
+                .then(create => {
+                    create.setTipos(r.types)
                 })
                 .catch(e => {
-                    console.log(e);
-                })            
+                    console.log('ERROR!!')
+                    console.log(e)
+                }))
+            
+            return resultados
         })
-    }
-})()
-
-Promise.all(todasLasPromesas.map(p => { return p() }))
-    .then(resultado => {
-    return resultado;
-})  .catch( err => {
-    console.log(err);
-});
-
-(async function dataCatcher () {
-    try {
-        setTimeout(() => {
-            for (let i = 0; i < newArr.length; i++) {
-                apiData.push({
-                    name: newArr[i].data.forms[0].name,
-                    type: newArr[i].data.types[0].type.name,
-                    height: newArr[i].data.height,
-                    weight: newArr[i].data.weight,
-                    imgUrl: newArr[i].data.sprites.other['official-artwork'].front_default,
-                    hp: newArr[i].data.stats.find(s => s.stat.name === 'hp').base_stat,
-                    strength: newArr[i].data.stats.find(s => s.stat.name === 'attack').base_stat,
-                    defense: newArr[i].data.stats.find(s => s.stat.name === 'defense').base_stat,
-                    speed: newArr[i].data.stats.find(s => s.stat.name === 'speed').base_stat
-                })
-            }
-        }, 2800);
-    } catch (e) {
-        console.log(e)
-    }
-})()
-
+        .catch(e => {
+            console.log(e)
+        })
+}
 setTimeout(() => {
-    for (let i = 0; i < apiData.length; i++) {
-        Pokemon.create({
-            name: apiData[i].name,
-            imgUrl: apiData[i].imgUrl,
-            type: apiData[i].type,
-            height: apiData[i].height,
-            weight: apiData[i].weight,
-            hp: apiData[i].hp,
-            strength: apiData[i].strength,
-            defense: apiData[i].defense,
-            speed: apiData[i].speed
-        })
-    }
-}, 3000);
+    getApiInfo()
+}, 500);
 
-router.get('/', async function (req, res) {
+
+router.get('/pokemons', async function (req, res) {
     try {
         const pokemonNames = await Pokemon.findAll({
-            order: [['name', 'ASC']],
-            attributes: ['name', 'pokemonId', 'imgUrl', 'height', 'weight', 'hp', 'strength', 'defense', 'speed']
+            // order: [['name', 'ASC']],
+            // attributes: ['name', 'pokemonId', 'imgUrl', 'height', 'weight', 'hp', 'strength', 'defense', 'speed', 'type']
+            include: {
+                model: Tipo
+            }
         });
         
         res.json(pokemonNames);
@@ -79,13 +78,25 @@ router.get('/', async function (req, res) {
     }
 });
 
-router.get('/:name', async function (req, res) {
-    
-})
-
-router.post('/', async function (req, res) {
-    const { id, name, vida, fuerza, defensa, velocidad, altura, peso, type } = req.body;
-    
+router.post('/pokemons', async function (req, res) {
+    const { name, hp, strength, defense, speed, height, weight, type, imgUrl } = req.body;
+    try {
+        const pokemonCreate = await Pokemon.create({
+            name: name,
+            hp: hp,
+            strength: strength,
+            defense: defense,
+            speed: speed,
+            height: height,
+            weight: weight,
+            imgUrl: imgUrl
+        })
+        pokemonCreate.setTipos(type)
+        res.json(`El pokemon ${name} con las caracteristicas, vida: ${hp}, fuerza: ${strength}, defensa: ${defense}, velocidad: ${speed}, altura: ${height}, y peso: ${weight} se ha creado correctamente`).status(201);
+    } catch (error) {
+        console.log(error)
+        res.sendStatus(500)
+    }
 });
 
 module.exports = router;
