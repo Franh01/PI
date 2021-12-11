@@ -11,8 +11,9 @@ export default function Pokemons() {
     const pokemons = useSelector((state) => state.pokemonReducer.pokemons);
 
     useEffect(() => {
-        dispatch(getPokemons())
+        dispatch(getPokemons(''))
     }, [])
+    console.log(pokemons)
     return (
         <div>
             <div className={s.navBarContainer}>
@@ -20,23 +21,38 @@ export default function Pokemons() {
             </div>
             
             <div className={s.container}>
-                {pokemons.length !== 0
+                {pokemons !== null && pokemons.length === undefined ?
+                    <PokemonCard
+                        key={pokemons.id}
+                        name={pokemons.name}
+                        img={pokemons.imgUrl}
+                        type={pokemons.tipos.map(p=>p.name)}
+                    /> : <span style={{display: 'none'}} />}
+                {pokemons !== null && pokemons.length
                     ?
                     pokemons.map(p => (
                         
                         <PokemonCard
-                        key={p.id}
-                        name={p.name}
-                        img={p.imgUrl}
-                        type={p.tipos.map(p=>p.name)}
-                    />
+                            key={p.id}
+                            name={p.name}
+                            img={p.imgUrl}
+                            type={p.tipos.map(p => p.name)}
+                        />
                     ))
+                    : <span style={{ display: 'none' }} />}
+                {pokemons === null ?
+                    <div className={s.warning}>El pokemon ingresado no se encuentra</div>
                     :
+                    <span style={{display: 'none'}} />}
+                {/* {!pokemons.length && pokemons.length > 1 ? //!mp funciona
                     <div className={s.loading}>
                         <h1>Cargando...</h1>
                         <img className={s.pokegif} src={gif} alt="pokegif" />
                     </div>
-                    }
+                :
+                    <span style={{ display: 'none' }} />
+                } */}
+                    
             </div>    
         </div>
     )

@@ -93,7 +93,10 @@ router.get('/pokemons/:name', async function (req, res) {
     const { name } = req.params;
     
         try {
-            const pokemonSearch = await Pokemon.findOne({ where: { name: name } });
+            const pokemonSearch = await Pokemon.findOne({
+                where: { name: name },
+                include: { model: Tipo }
+            });
             res.json(pokemonSearch).status(200);
         } catch (e) {
             console.log(e)

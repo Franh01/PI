@@ -2,9 +2,9 @@
 import { CREATE_POKEMON, GET_POKEMONS, GET_TYPES, GET_POKEMON_BY_NAME } from './actionTypes';
 import axios from 'axios';
 
-export const getPokemons = () => {
+export const getPokemons = (value) => {
     return (dispatch) => {
-            axios.get('http://localhost:3001/pokemons')
+            axios.get(`http://localhost:3001/pokemons/${value}`)
             .then(r => r.data)
             .then(data => {
                 dispatch({

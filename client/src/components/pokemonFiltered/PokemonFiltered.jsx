@@ -13,7 +13,13 @@ export default function PokemonFiltered() {
     if (pokemons.length === 0) {
         dispatch(getPokemons())
     }
-    const pokemonFiltrado = pokemons.find(p => p.name === pokemonsFiltered)
+    console.log('(en filtered) POKEMONS: ',pokemons)
+    let pokemonFiltrado;
+    if (pokemons.length) {
+        pokemonFiltrado = pokemons.find(p => p.name === pokemonsFiltered);
+    } else {
+        pokemonFiltrado = pokemons;
+    }
     const type = pokemonFiltrado.tipos.map(p => p.name)
     const name = pokemonFiltrado.name
     const img = pokemonFiltrado.imgUrl

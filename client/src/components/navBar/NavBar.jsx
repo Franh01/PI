@@ -1,19 +1,22 @@
 import s from './NavBar.module.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import homeImg from '../../img/pixelspoke.png'
 import searchIco from '../../img/searchIcon.png'
 import { useDispatch, useSelector } from 'react-redux';
-import { getPokemonByName, getTypes } from '../../redux/actions/pokemon';
+import { getPokemons, getTypes } from '../../redux/actions/pokemon';
 import { useState } from 'react';
 
 export default function NavBar() {
     const tipos = useSelector((state) => state.pokemonReducer.types.map(t => t.name));
-    const pokemonNames = useSelector((state) => state.pokemonReducer.pokemons.map(p => p.name));
-    console.log(pokemonNames)
+    const pokemons = useSelector((state) => state.pokemonReducer.pokemons)
+    let pokemonNames = [];
+    if (pokemons !== null && pokemons.length) {
+        pokemonNames = pokemons.map(p => p.name)
+    }
+    // console.log(pokemonNames)
 
     // console.log(pokemonFiltrado);
     const dispatch = useDispatch()
-    const navigate = useNavigate()
     if (tipos.length === 0) {
         dispatch(getTypes())
     };
@@ -22,23 +25,20 @@ export default function NavBar() {
     };
     const [name, setName] = useState('');
     function handleOnSearch() {
-        if (pokemonNames.find(p=>p === name)) {
-            dispatch(getPokemonByName(name));
-            navigate(`/pokemons/${name}`)
-            console.log(true)
-        } else {
-            setName('')
-            return alert(`El pokemon con el nombre ${name} no fue encontrado`)
-        }
+        dispatch(getPokemons(name));
     }
     // const urlParam = window.location.href.toString().slice(31);
     // if (urlParam.length > 0 && pokemonFiltrado !== 'none') {
     //     dispatch(getPokemonByName(urlParam))
     // }
+    function homeBtn() {
+        setName('')
+        dispatch(getPokemons(''))
+    }
     return (
         <div className={s.navBarContainer}>
             <div className={s.homeAndSearch}>
-                <div className={s.navComp}><Link to='/pokemons'><img className={s.homeImg} src={homeImg} alt='homebtn' /></Link></div>
+                <div className={s.navComp}><Link to='/pokemons'><img className={s.homeImg} src={homeImg} alt='homebtn' onClick={()=>homeBtn()}/></Link></div>
                 
                 <div className={s.navComp}>
                     <input type="text" className={s.searchBar} placeholder='Ej: pikachu...' value={name} onChange={e=>{setName(e.target.value.toLowerCase())}}/>

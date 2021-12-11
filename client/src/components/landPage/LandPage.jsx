@@ -7,12 +7,12 @@ import pokeballImg from '../../img/pokeballreddot.png'
 
 export default function Pokemons() {
     const dispatch = useDispatch();
+    dispatch(getPokemons(''))
     setTimeout(() => {
-        dispatch(getPokemons())
         dispatch(getTypes())
     }, 3500);
     function handleOnClick() {
-        dispatch(getPokemons());
+        dispatch(getPokemons(''));
     }
     return (
         <div className={s.container}>
