@@ -5,20 +5,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getPokemons } from '../../redux/actions/pokemon';
 import defaultImg from '../../img/questionMark.png';
 import NavBar from '../navBar/NavBar';
+import { useNavigate } from 'react-router-dom';
 
 export default function PokemonFiltered() {
+    const navigate = useNavigate()
+    const dispatch = useDispatch();
+    const [color, setColor] = useState('#808080'); 
+    const [typeImg, setTypeImg] = useState('');
+    const [typeImg1, setTypeImg1] = useState('');
     const pokemons = useSelector((data) => data.pokemonReducer.pokemons)
     const pokemonsFiltered = useSelector((data) => data.pokemonReducer.pokemonFiltered)
-    const dispatch = useDispatch()
-    if (pokemons.length === 0) {
-        dispatch(getPokemons())
-    }
+
     console.log('(en filtered) POKEMONS: ',pokemons)
     let pokemonFiltrado;
-    if (pokemons.length) {
+    if (pokemons !== null && pokemons.length) {
         pokemonFiltrado = pokemons.find(p => p.name === pokemonsFiltered);
     } else {
         pokemonFiltrado = pokemons;
+    }
+    if (pokemons === null) {
+        dispatch(getPokemons(''))
+        alert('El pokemon ingresado no se encuentra')//! debugear esto
     }
     const type = pokemonFiltrado.tipos.map(p => p.name)
     const name = pokemonFiltrado.name
@@ -44,11 +51,6 @@ export default function PokemonFiltered() {
     const steelC = '#5abdcc';
     const waterC = '#516BEB';
 
-    const [color, setColor] = useState('#808080');
-    
-
-    const [typeImg, setTypeImg] = useState('');
-    const [typeImg1, setTypeImg1] = useState('');
     
         if (type[0] === 'poison' && color !== poisonC) {
             setColor(poisonC);
