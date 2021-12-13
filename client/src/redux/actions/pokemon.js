@@ -15,13 +15,6 @@ export const getPokemons = (value) => {
     }
 }
 
-export const getPokemonByName = (data) => {
-    return {
-        type: GET_POKEMON_BY_NAME,
-        payload: data
-    }
-}
-
 export const getTypes = () => {
     return (dispatch) => {
             axios.get('http://localhost:3001/tipos')

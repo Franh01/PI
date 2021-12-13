@@ -7,6 +7,7 @@ import NavBar from '../navBar/NavBar';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getPokemons } from '../../redux/actions/pokemon';
 import Error from '../error404/Error';
+import Loading from '../loading/Loading';
 
 export default function PokemonFiltered() {
     const dispatch = useDispatch();
@@ -17,9 +18,16 @@ export default function PokemonFiltered() {
     const [typeImg, setTypeImg] = useState('');
     const [typeImg1, setTypeImg1] = useState('');
     const pokemons = useSelector((data) => data.pokemonReducer.pokemons);
-    console.log(pokemons)
-    const pokemonsFiltered = useSelector((data) => data.pokemonReducer.pokemonFiltered);
 
+
+    if (pokemons.length > 1) {
+        dispatch(getPokemons(pokeUrl))
+        return (
+            <div>
+                <Loading/>
+            </div>
+        )
+    }
     if (pokemons === null) {
         return (
             <div>
@@ -32,7 +40,7 @@ export default function PokemonFiltered() {
         dispatch(getPokemons(pokeUrl))
         return (
             <div>
-                <h1>Loading...</h1>
+                <Loading/>
             </div>
         )
     }
@@ -48,16 +56,9 @@ export default function PokemonFiltered() {
         )
     } else {
         
-        let pokemonFiltrado;
-        if (pokemons !== null && pokemons.length) {
-            pokemonFiltrado = pokemons.find(p => p.name === pokemonsFiltered);
-        } else {
-            pokemonFiltrado = pokemons;
-        }
-        const type = pokemonFiltrado.tipos.map(p => p.name)
-        const name = pokemonFiltrado.name
-        const img = pokemonFiltrado.imgUrl
-        console.log(pokemonFiltrado)
+        const type = pokemons.tipos.map(p => p.name);
+        const name = pokemons.name;
+        const img = pokemons.imgUrl;
         
         const bugC = '#3c9950';
         const darkC = '#040707';
@@ -203,17 +204,17 @@ export default function PokemonFiltered() {
     
                                     <div className={s.dimensionesText}>
                                         <h3>Dimensiones:</h3>
-                                        <h4>Altura: {pokemonFiltrado.height}</h4>
-                                        <h4>Peso: {pokemonFiltrado.weight}</h4>                
+                                        <h4>Altura: {pokemons.height}</h4>
+                                        <h4>Peso: {pokemons.weight}</h4>                
                                     </div>
                                 
     
                                     <div className={s.atributosText}>
                                         <h3>Atributos:</h3>
-                                        <h4>Vida: {pokemonFiltrado.hp}</h4>
-                                        <h4>Ataque: {pokemonFiltrado.strength}</h4>
-                                        <h4>Defensa: {pokemonFiltrado.defense}</h4>
-                                        <h4>Velocidad: {pokemonFiltrado.speed}</h4>
+                                        <h4>Vida: {pokemons.hp}</h4>
+                                        <h4>Ataque: {pokemons.strength}</h4>
+                                        <h4>Defensa: {pokemons.defense}</h4>
+                                        <h4>Velocidad: {pokemons.speed}</h4>
                                 </div>
                                 <div></div>
                                 <div></div>

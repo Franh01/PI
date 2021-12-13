@@ -10,15 +10,6 @@
     min-width: 100px;
 }
 
-.loading {
-    display: flex;
-    position: absolute;
-    align-items: center;
-    flex-direction: row;
-    left: 40%;
-    top: 10%;
-}
-
 .warning{
     display: flex;
     margin-left: 2%;

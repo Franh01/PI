@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getPokemons } from '../../redux/actions/pokemon';
 import NavBar from '../navBar/NavBar';
-import gif from '../../img/loading.gif'
+import Loading from '../loading/Loading';
 
 export default function Pokemons() {
     const dispatch = useDispatch()
@@ -13,7 +13,21 @@ export default function Pokemons() {
     useEffect(() => {
         dispatch(getPokemons(''))
     }, [])
-    console.log(pokemons)
+    if (pokemons === null) {
+        return (
+            <div>
+                <NavBar/>
+                <h3 style={{marginTop: '5%', marginLeft: '2%', color: 'black'}}>El pokemon ingresado no se encuentra</h3>
+            </div>
+        )
+    }
+    if (pokemons.length === 0) {
+        return (
+            <div>
+                <Loading/>
+            </div>
+        )
+    }
     return (
         <div>
             <div className={s.navBarContainer}>
@@ -44,15 +58,6 @@ export default function Pokemons() {
                     <div className={s.warning}>El pokemon ingresado no se encuentra</div>
                     :
                     <span style={{display: 'none'}} />}
-                {/* {!pokemons.length && pokemons.length > 1 ? //!mp funciona
-                    <div className={s.loading}>
-                        <h1>Cargando...</h1>
-                        <img className={s.pokegif} src={gif} alt="pokegif" />
-                    </div>
-                :
-                    <span style={{ display: 'none' }} />
-                } */}
-                    
             </div>    
         </div>
     )
