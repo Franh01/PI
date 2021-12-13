@@ -1,5 +1,5 @@
 //Actions
-import { CREATE_POKEMON, GET_POKEMONS, GET_TYPES, GET_POKEMON_BY_NAME } from './actionTypes';
+import { CREATE_POKEMON, GET_POKEMONS, GET_TYPES, GET_POKEMONS_FILTERED } from './actionTypes';
 import axios from 'axios';
 
 export const getPokemons = (value) => {
@@ -14,6 +14,21 @@ export const getPokemons = (value) => {
             })
     }
 }
+
+export const getPokemonsFiltered = (filter, orderBy) => {
+    console.log(filter, orderBy)
+    return (dispatch) => {
+            axios.get(`http://localhost:3001/pokemons/`, [filter, orderBy])
+            .then(r => r.data)
+            .then(data => {
+                dispatch({
+                    type: GET_POKEMONS_FILTERED,
+                    payload: data
+                })
+            })
+    }
+}
+
 
 export const getTypes = () => {
     return (dispatch) => {

@@ -63,20 +63,24 @@ setTimeout(() => {
 
 
 router.get('/pokemons', async function (req, res) {
-    const { name } = req.body;
-    if (name) {
+    const { filter, orderBy } = req.body;
+    if (filter && orderBy) {
         try {
-            const pokemonSearch = await Pokemon.findOne({ where: { name: name } });
-            res.json(pokemonSearch).status(200);
+            const pokemonNames = await Pokemon.findAll({
+                order: [[filter, orderBy]],
+                attributes: ['name', 'id', 'imgUrl', 'height', 'weight', 'hp', 'strength', 'defense', 'speed'],
+                include: {
+                    model: Tipo
+                }
+            });
+            
+            res.json(pokemonNames);
         } catch (e) {
             console.log(e)
-            res.sendStatus(404)
         }
     } else {
         try {
             const pokemonNames = await Pokemon.findAll({
-                // order: [['name', 'ASC']],
-                // attributes: ['name', 'pokemonId', 'imgUrl', 'height', 'weight', 'hp', 'strength', 'defense', 'speed', 'type']
                 include: {
                     model: Tipo
                 }

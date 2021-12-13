@@ -98,10 +98,10 @@ export default function PokemonCard({ name, img, type }) {
         e.target.src = defaultImg;
     }
     return (
-        <div onClick={()=>handleOnClick()}>
+        <div>
             {img ?                
                     <div>
-                        <div className={s.card} style={
+                        <div onClick={()=>handleOnClick()} className={s.card} style={
                             {
                                 background: `radial-gradient(circle, ${color}7f 70%, ${color} 100%)`,
                                 border: '5px solid',
@@ -130,7 +130,7 @@ export default function PokemonCard({ name, img, type }) {
                     </div>
                 :
                     <div>
-                        <div className={s.card} style={
+                        <div onClick={()=>handleOnClick()} className={s.card} style={
                             {
                                 background: `radial-gradient(circle, ${color}7f 70%, ${color} 100%)`,
                                 border: '5px solid',

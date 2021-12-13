@@ -2,13 +2,18 @@ import s from './CreatePokemon.module.css';
 import { useState } from 'react';
 import { useNavigate} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { createPokemon, getTypes } from '../../redux/actions/pokemon';
+import { createPokemon, getPokemons, getTypes } from '../../redux/actions/pokemon';
 import NavBar from '../navBar/NavBar';
 
 export default function CreatePokemon() {
-    const tipos = useSelector((state) => state.pokemonReducer.types.map(t => t.name));
     const dispatch = useDispatch();
+
+    const pokemons = useSelector((state) => state.pokemonReducer.pokemons.map(n => n.name));
+    const tipos = useSelector((state) => state.pokemonReducer.types.map(t => t.name));
     const navigate = useNavigate();
+    if (pokemons.length === 0) {
+        dispatch(getPokemons(''))
+    };
     if (tipos.length === 0) {
         dispatch(getTypes())
     };
@@ -29,6 +34,10 @@ export default function CreatePokemon() {
 
     function handleOnSubmit(e) {
         e.preventDefault()
+        if (pokemons.some(p => p === name)) {
+            setName('');
+            return alert('Ya existe un pokemon con ese nombre');
+        }
         if (!name.match(/^[A-Za-z]+$/)) {
             setName('')
             return alert('Solo pudas usar letras en el nombre!')

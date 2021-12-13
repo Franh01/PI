@@ -1,4 +1,4 @@
-import { GET_POKEMONS, GET_TYPES } from '../actions/actionTypes';
+import { GET_POKEMONS, GET_POKEMONS_FILTERED, GET_TYPES } from '../actions/actionTypes';
 
 const initialState = {    
     pokemons: [],
@@ -17,6 +17,11 @@ const postsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 types: payload
+            }
+        case GET_POKEMONS_FILTERED:
+            return {
+                ...state,
+                pokemons: payload
             }
         default:
             return state;

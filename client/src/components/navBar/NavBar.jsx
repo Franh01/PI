@@ -3,19 +3,13 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import homeImg from '../../img/pixelspoke.png'
 import searchIco from '../../img/searchIcon.png'
 import { useDispatch, useSelector } from 'react-redux';
-import { getPokemons, getTypes } from '../../redux/actions/pokemon';
+import { getPokemons, getPokemonsFiltered, getTypes } from '../../redux/actions/pokemon';
 import { useState } from 'react';
 
 export default function NavBar() {
     const tipos = useSelector((state) => state.pokemonReducer.types.map(t => t.name));
-    const pokemons = useSelector((state) => state.pokemonReducer.pokemons)
     const location = useLocation();
     const navigate = useNavigate();
-    console.log(location.pathname.length)
-    let pokemonNames = [];
-    if (pokemons !== null && pokemons.length) {
-        pokemonNames = pokemons.map(p => p.name)
-    }
     const dispatch = useDispatch()
     if (tipos.length === 0) {
         dispatch(getTypes())
@@ -37,6 +31,20 @@ export default function NavBar() {
         setName('')
         dispatch(getPokemons(''))
     }
+    //* FILTRO DE TIPO
+    const [type, setType] = useState('');
+    function typeFilterButton() {
+        console.log(type)
+    }
+
+    //* FILTRO DE ORDEN
+    const [filter, setFilter] = useState('');
+    const [orderBy, setOrderBy] = useState('');
+    function orderFilterButton() {
+        dispatch(getPokemonsFiltered(filter, orderBy))
+    }
+
+
     return (
         <div className={s.navBarContainer}>
             <div className={s.homeAndSearch}>
@@ -52,25 +60,25 @@ export default function NavBar() {
 
             <div className={s.filters}>
                 <div className={s.navComp}>
-                    <select className={s.fonting}>
-                        <option defaultValue>Todos</option>
+                    <select className={s.fonting} value={type} onChange={(e)=> setType(e.target.value)}>
+                        <option defaultValue>todos</option>
                         {tipos.map(makeItem)}
                     </select>
-                    <button className={s.fonting}>Aplicar</button>
+                    <button className={s.fonting} onClick={() => typeFilterButton()}>Aplicar</button>
                 </div>
 
                 <div className={s.navComp}>
-                    <select className={s.fonting}>
+                    <select className={s.fonting} value={filter} onChange={(e)=> setFilter(e.target.value)}>
                         <option defaultValue>---</option>
-                        <option>Nombre</option>
-                        <option>Fuerza</option>
+                        <option>name</option>
+                        <option>strength</option>
                     </select>
-                    <select className={s.fonting}>
+                    <select className={s.fonting}  value={orderBy} onChange={(e)=> setOrderBy(e.target.value)}>
                         <option defaultValue>---</option>
                         <option>ASC</option>
                         <option>DESC</option>
                     </select>
-                    <button className={s.fonting}>Aplicar</button>
+                    <button className={s.fonting} onClick={() => orderFilterButton()}>Aplicar</button>
                 </div>
             </div>
             
