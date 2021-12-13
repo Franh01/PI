@@ -7,13 +7,15 @@ import NavBar from '../navBar/NavBar';
 
 export default function CreatePokemon() {
     const dispatch = useDispatch();
-
-    const pokemons = useSelector((state) => state.pokemonReducer.pokemons.map(n => n.name));
     const tipos = useSelector((state) => state.pokemonReducer.types.map(t => t.name));
-    const navigate = useNavigate();
-    if (pokemons.length === 0) {
+    let pokemons = useSelector((state) => state.pokemonReducer.pokemons)
+    if (pokemons.length === undefined) {
         dispatch(getPokemons(''))
-    };
+    }
+    if (pokemons.length > 0) {
+        pokemons = pokemons.map(n=>n.name)
+    }
+    const navigate = useNavigate();
     if (tipos.length === 0) {
         dispatch(getTypes())
     };
@@ -33,11 +35,13 @@ export default function CreatePokemon() {
     };
 
     function handleOnSubmit(e) {
-        e.preventDefault()
+
         if (pokemons.some(p => p === name)) {
             setName('');
             return alert('Ya existe un pokemon con ese nombre');
         }
+
+        e.preventDefault()        
         if (!name.match(/^[A-Za-z]+$/)) {
             setName('')
             return alert('Solo pudas usar letras en el nombre!')
@@ -99,7 +103,7 @@ export default function CreatePokemon() {
     }
     
     
-
+  
     return (
         <div className={s.container}>
             <NavBar/>
@@ -108,9 +112,7 @@ export default function CreatePokemon() {
 
                     <div className={s.nameContainer}>
                         <h4 className={s.titles} style={{ margin: '10px 0px 0px 0px' }}>Nombre *:</h4>
-                        <input className={s.inputs} type='text' placeholder='Pikachu...' required value={name} onChange={e => {
-                            setName(e.target.value)
-                        }}></input>
+                        <input className={s.inputs} type='text' placeholder='Pikachu...' required value={name} onChange={(e) => setName(e.target.value)}></input>
                     </div>
 
                     <div className={s.typesContainer}>

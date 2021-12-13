@@ -22,7 +22,6 @@ export default function NavBar() {
         if (location.pathname.length > 10) {
             navigate(`/pokemons/${name}`)
             dispatch(getPokemons(name));
-            console.log('Si entre')
         } else {
             dispatch(getPokemons(name));
         }

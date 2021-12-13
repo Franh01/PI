@@ -63,7 +63,19 @@ setTimeout(() => {
 
 
 router.get('/pokemons', async function (req, res) {
-    const { filter, orderBy } = req.body;
+    const { filter, orderBy, name } = req.query;
+    if (name) {
+        try {
+            const pokemonSearch = await Pokemon.findOne({
+                where: { name: name },
+                include: { model: Tipo }
+            });
+            res.json(pokemonSearch).status(200);
+        } catch (e) {
+            console.log(e)
+            res.json(`No existe un pokemon con el nombre ${name}`).status(404)
+        }
+    }
     if (filter && orderBy) {
         try {
             const pokemonNames = await Pokemon.findAll({
@@ -81,6 +93,7 @@ router.get('/pokemons', async function (req, res) {
     } else {
         try {
             const pokemonNames = await Pokemon.findAll({
+                attributes: ['name', 'imgUrl'],
                 include: {
                     model: Tipo
                 }
@@ -93,20 +106,21 @@ router.get('/pokemons', async function (req, res) {
     }
 });
 
-router.get('/pokemons/:name', async function (req, res) {
-    const { name } = req.params;
+//! params
+// router.get('/pokemons/:name', async function (req, res) {
+//     const { name } = req.params;
     
-        try {
-            const pokemonSearch = await Pokemon.findOne({
-                where: { name: name },
-                include: { model: Tipo }
-            });
-            res.json(pokemonSearch).status(200);
-        } catch (e) {
-            console.log(e)
-            res.json(`No existe un pokemon con el nombre ${name}`).status(404)
-        }
-});
+//         try {
+//             const pokemonSearch = await Pokemon.findOne({
+//                 where: { name: name },
+//                 include: { model: Tipo }
+//             });
+//             res.json(pokemonSearch).status(200);
+//         } catch (e) {
+//             console.log(e)
+//             res.json(`No existe un pokemon con el nombre ${name}`).status(404)
+//         }
+// });
 
 router.post('/pokemons', async function (req, res) {
     const { name, hp, strength, defense, speed, height, weight, type, imgUrl } = req.body;

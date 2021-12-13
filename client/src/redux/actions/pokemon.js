@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export const getPokemons = (value) => {
     return (dispatch) => {
-            axios.get(`http://localhost:3001/pokemons/${value}`)
+            axios.get(`http://localhost:3001/pokemons?name=${value}`)
             .then(r => r.data)
             .then(data => {
                 dispatch({
@@ -18,7 +18,7 @@ export const getPokemons = (value) => {
 export const getPokemonsFiltered = (filter, orderBy) => {
     console.log(filter, orderBy)
     return (dispatch) => {
-            axios.get(`http://localhost:3001/pokemons/`, {filter, orderBy})
+            axios.get(`http://localhost:3001/pokemons`, {params: {filter, orderBy}})
             .then(r => r.data)
             .then(data => {
                 dispatch({
