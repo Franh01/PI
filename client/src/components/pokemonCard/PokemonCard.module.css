@@ -35,9 +35,14 @@
 }
 
 .nameContainer {
+    display: flex;
     border-bottom: 1px solid #000;
+    margin-bottom: 10px;
+    max-width: 70px;
     padding: 0 40px;
     font-family: 'Press Start 2P';
+    align-items: center;
+    justify-content: center;
 }
 
 .typeContainer {

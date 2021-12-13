@@ -44,7 +44,7 @@ export default function NavBar() {
                 
                 <div className={s.navComp}>
                     <input type="text" className={s.searchBar} placeholder='Ej: pikachu...' value={name} onChange={e=>{setName(e.target.value.toLowerCase())}}/>
-                    <button className={s.searchButton}><img className={s.searchIcon} src={searchIco} alt="search ico" onClick={()=>handleOnSearch()}/></button>
+                    <button className={s.searchButton} onClick={()=>handleOnSearch()}><img className={s.searchIcon} src={searchIco} alt="search ico"/></button>
                 </div>
             </div>
             
