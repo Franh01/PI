@@ -32,7 +32,7 @@ export const getPokemonsFiltered = (filter, orderBy) => {
 
 export const getTypes = () => {
     return (dispatch) => {
-            axios.get('http://localhost:3001/tipos')
+            axios.get('http://localhost:3001/types')
             .then(r => r.data)
             .then(data => {
                 dispatch({

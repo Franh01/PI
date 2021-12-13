@@ -61,6 +61,21 @@ setTimeout(() => {
     getApiInfo()
 }, 2000);
 
+router.get('/pokemons/:id', async function (req, res) {
+    const { id } = req.params;
+    console.log(id)
+        try {
+            const pokemonSearch = await Pokemon.findOne({
+                where: { id: id },
+                include: { model: Tipo }
+            });
+            res.json(pokemonSearch).status(200);
+        } catch (e) {
+            console.log(e)
+            res.json(`No existe un pokemon con el id ${id}`).status(404)
+        }
+});
+
 
 router.get('/pokemons', async function (req, res) {
     const { filter, orderBy, name } = req.query;
@@ -106,21 +121,6 @@ router.get('/pokemons', async function (req, res) {
     }
 });
 
-//! params
-// router.get('/pokemons/:name', async function (req, res) {
-//     const { name } = req.params;
-    
-//         try {
-//             const pokemonSearch = await Pokemon.findOne({
-//                 where: { name: name },
-//                 include: { model: Tipo }
-//             });
-//             res.json(pokemonSearch).status(200);
-//         } catch (e) {
-//             console.log(e)
-//             res.json(`No existe un pokemon con el nombre ${name}`).status(404)
-//         }
-// });
 
 router.post('/pokemons', async function (req, res) {
     const { name, hp, strength, defense, speed, height, weight, type, imgUrl } = req.body;

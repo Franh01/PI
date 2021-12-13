@@ -38,16 +38,16 @@ const getTypeInfo = async () => {
 }
 getTypeInfo()
 
-router.get('/tipos', async function (req, res) {
+router.get('/types', async function (req, res) {
     try {
-        const pokemonTypes = await Tipo.findAll();    
+        const pokemonTypes = await Tipo.findAll();
         res.json(pokemonTypes);
     } catch (e) {
         console.log(e)
     }
-})
+});
 
-router.post('/tipos', async function (req, res) {
+router.post('/types', async function (req, res) {
     try {
         Tipo.create({
             name: req.body.name
@@ -57,6 +57,6 @@ router.post('/tipos', async function (req, res) {
         console.log(e)
         res.sendStatus(500);
     }
-})
+});
 
 module.exports = router;
