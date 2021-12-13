@@ -1,5 +1,5 @@
 import s from './NavBar.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import homeImg from '../../img/pixelspoke.png'
 import searchIco from '../../img/searchIcon.png'
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,6 +9,9 @@ import { useState } from 'react';
 export default function NavBar() {
     const tipos = useSelector((state) => state.pokemonReducer.types.map(t => t.name));
     const pokemons = useSelector((state) => state.pokemonReducer.pokemons)
+    const location = useLocation();
+    const navigate = useNavigate();
+    console.log(location.pathname.length)
     let pokemonNames = [];
     if (pokemons !== null && pokemons.length) {
         pokemonNames = pokemons.map(p => p.name)
@@ -22,7 +25,13 @@ export default function NavBar() {
     };
     const [name, setName] = useState('');
     function handleOnSearch() {
-        dispatch(getPokemons(name));
+        if (location.pathname.length > 10) {
+            navigate(`/pokemons/${name}`)
+            dispatch(getPokemons(name));
+            console.log('Si entre')
+        } else {
+            dispatch(getPokemons(name));
+        }
     }
     function homeBtn() {
         setName('')

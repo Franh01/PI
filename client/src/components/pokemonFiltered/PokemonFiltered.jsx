@@ -1,28 +1,53 @@
 import { useState } from 'react';
 import s from './PokemonFiltered.module.css';
 import * as allImages from '../../img/pokeImages'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import defaultImg from '../../img/questionMark.png';
 import NavBar from '../navBar/NavBar';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { getPokemons } from '../../redux/actions/pokemon';
+import Error from '../error404/Error';
 
 export default function PokemonFiltered() {
+    const dispatch = useDispatch();
+    const params = useParams();
+    const pokeUrl = params.pokemonName;
     const navigate = useNavigate();
     const [color, setColor] = useState('#808080'); 
     const [typeImg, setTypeImg] = useState('');
     const [typeImg1, setTypeImg1] = useState('');
-    const pokemons = useSelector((data) => data.pokemonReducer.pokemons)
-    const pokemonsFiltered = useSelector((data) => data.pokemonReducer.pokemonFiltered)
+    const pokemons = useSelector((data) => data.pokemonReducer.pokemons);
+    console.log(pokemons)
+    const pokemonsFiltered = useSelector((data) => data.pokemonReducer.pokemonFiltered);
 
+    if (pokemons === null) {
+        return (
+            <div>
+                <Error/>
+            </div>
+        )
+    }
+
+    if (pokemons.length === 0) {
+        dispatch(getPokemons(pokeUrl))
+        return (
+            <div>
+                <h1>Loading...</h1>
+            </div>
+        )
+    }
+    
     if (pokemons === null) {
         navigate('/pokemons')
         alert('El pokemon ingresado no se encuentra')
 
         return (
-            <div></div>
+            <div>
+                <Error/>
+            </div>
         )
     } else {
-
+        
         let pokemonFiltrado;
         if (pokemons !== null && pokemons.length) {
             pokemonFiltrado = pokemons.find(p => p.name === pokemonsFiltered);

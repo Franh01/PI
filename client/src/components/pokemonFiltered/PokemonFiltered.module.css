@@ -83,6 +83,7 @@
     height: 10px;
     transition-duration: .5s;
     transition-timing-function: cubic-bezier(.2,.42,1,1.11);
+    font-family: 'Poppins';
 }
 .activador:hover {
     transition-duration: .5s;
