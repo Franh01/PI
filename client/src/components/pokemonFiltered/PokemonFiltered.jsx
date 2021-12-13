@@ -19,11 +19,7 @@ export default function PokemonFiltered() {
         alert('El pokemon ingresado no se encuentra')
 
         return (
-            <div>
-                <h1>
-                    No se pudo encontrar el pokemon solicitado
-                </h1>
-            </div>
+            <div></div>
         )
     } else {
 
