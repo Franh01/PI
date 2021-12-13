@@ -196,7 +196,10 @@ export default function PokemonFiltered() {
                         }}>
                         <div>
                             <div className={s.nameContainer}>
-                                <h2 style={{fontSize: '30px'}}>{upperName}</h2>
+                                <div className={s.idContainer}>
+                                    <h5>Id: {pokemons.id}</h5>
+                                </div>
+                                <h2 style={{ fontSize: '30px' }}>{upperName}</h2>
                             </div>
     
                             <div className={s.imgContainer}>

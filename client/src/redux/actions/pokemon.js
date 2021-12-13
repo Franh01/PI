@@ -18,7 +18,7 @@ export const getPokemons = (value) => {
 export const getPokemonsFiltered = (filter, orderBy) => {
     console.log(filter, orderBy)
     return (dispatch) => {
-            axios.get(`http://localhost:3001/pokemons/`, [filter, orderBy])
+            axios.get(`http://localhost:3001/pokemons/`, {filter, orderBy})
             .then(r => r.data)
             .then(data => {
                 dispatch({

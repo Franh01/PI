@@ -44,19 +44,12 @@
 
 .nameContainer {
     border-bottom: 1px solid #000;
-    margin: 0 338px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-around;
     align-items: center;
-    transition-duration: .5s;
-    transition-timing-function: cubic-bezier(.2,.42,1,1.11);
 }
 
-.nameContainer:hover {
-    transition-duration: .5s;
-    transition-timing-function: cubic-bezier(0,1.08,1,.89);
-    transform: scale(1.03);
-}
 
 .typeContainer {
     display: flex;
@@ -132,5 +125,12 @@
 .typesContainer {
     display: flex;
     flex-direction: row;
+}
+
+.idContainer
+{
+    display: flex;
+    justify-content: center;
+    font-family: 'Poppins';
 }
 

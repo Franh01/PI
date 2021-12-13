@@ -68,7 +68,7 @@ router.get('/pokemons', async function (req, res) {
         try {
             const pokemonNames = await Pokemon.findAll({
                 order: [[filter, orderBy]],
-                attributes: ['name', 'id', 'imgUrl', 'height', 'weight', 'hp', 'strength', 'defense', 'speed'],
+                attributes: ['name', 'imgUrl'],
                 include: {
                     model: Tipo
                 }
@@ -104,7 +104,7 @@ router.get('/pokemons/:name', async function (req, res) {
             res.json(pokemonSearch).status(200);
         } catch (e) {
             console.log(e)
-            res.sendStatus(404)
+            res.json(`No existe un pokemon con el nombre ${name}`).status(404)
         }
 });
 
