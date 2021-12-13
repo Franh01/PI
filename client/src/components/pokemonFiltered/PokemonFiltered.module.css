@@ -15,11 +15,19 @@
     box-shadow: inset 0 -3em 3em rgb(0 0 0 / 20%), 0 0 0 2px rgb(255 255 255 / 0%), 0.3em 0.3em 1em rgb(0 0 0 / 59%);
 }
 
-.image {
-    max-width: 100%;
-    filter: drop-shadow(20px 10px 8px #000) saturate(2);
-    transition-duration: .5s;
-    transition-timing-function: cubic-bezier(.2,.42,1,1.11);
+.image 
+{
+        max-width: 100%;
+        filter: drop-shadow(20px 10px 8px #000) saturate(2);
+        transition-duration: .5s;
+        transition-timing-function: cubic-bezier(.2,.42,1,1.11);
+}
+
+.defaultImg {
+        max-height: 258px;
+        filter: drop-shadow(20px 10px 8px #000) saturate(2);
+        transition-duration: .5s;
+        transition-timing-function: cubic-bezier(.2,.42,1,1.11);
 }
 
 .image:hover {

@@ -94,7 +94,7 @@ export default function PokemonCard({ name, img, type }) {
     function handleOnClick() {
         dispatch(getPokemonByName(name));
         setTimeout(() => {
-            navigate(`/pokemons/${name}`)
+            navigate(`/pokemons/detail`)
         }, 200);
     }
     function addDefaultImg(e){
