@@ -197,17 +197,34 @@ export default function PokemonFiltered() {
                             <div className={s.typeContainer}>
                                 {
                                     type.length === 1 ?
-                                        <div>
+                                        <div className={s.activador}>   
                                             <div className={s.toolTip}>
                                                 <h4>{`${type[0]}`}</h4>
                                             </div>
-                                            
-                                            <img className={s.typeImg} src={typeImg} alt={`${type[0]} type`} />
+                                            <div>
+                                                <img className={s.typeImg} src={typeImg} alt={`${type[0]} type`} />
+                                            </div>
                                         </div>
                                         :
-                                        <div>
-                                            <img className={s.typeImg} src={typeImg} alt={`${type[0]} type`}/>
-                                            <img className={s.typeImg} src={typeImg1} alt={`${type[1]} type`}/>
+                                        <div className={s.typesContainer}>
+                                            <div className={s.activador}>
+                                                <div className={s.toolTip}>
+                                                    <h4>{`${type[0]}`}</h4>
+                                                </div>
+                                                <div>
+                                                    <img className={s.typeImg} src={typeImg} alt={`${type[0]} type`} />
+                                                </div>
+                                            </div>
+
+                                            <div className={s.activador}>
+                                                <div className={s.toolTip}>
+                                                    <h4>{`${type[1]}`}</h4>
+                                                </div>
+
+                                                <div>
+                                                    <img className={s.typeImg} src={typeImg1} alt={`${type[1]} type`} />
+                                                </div>
+                                            </div>
                                         </div>
                                 }
                             </div>

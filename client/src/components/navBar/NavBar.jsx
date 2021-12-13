@@ -13,9 +13,6 @@ export default function NavBar() {
     if (pokemons !== null && pokemons.length) {
         pokemonNames = pokemons.map(p => p.name)
     }
-    // console.log(pokemonNames)
-
-    // console.log(pokemonFiltrado);
     const dispatch = useDispatch()
     if (tipos.length === 0) {
         dispatch(getTypes())
@@ -27,10 +24,6 @@ export default function NavBar() {
     function handleOnSearch() {
         dispatch(getPokemons(name));
     }
-    // const urlParam = window.location.href.toString().slice(31);
-    // if (urlParam.length > 0 && pokemonFiltrado !== 'none') {
-    //     dispatch(getPokemonByName(urlParam))
-    // }
     function homeBtn() {
         setName('')
         dispatch(getPokemons(''))

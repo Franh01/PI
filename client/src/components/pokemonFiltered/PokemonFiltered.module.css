@@ -68,33 +68,32 @@
 .typeImg{
     max-width: 90px;
     margin-top: -30px;
+    filter: saturate(1.2) contrast(1.1);
+}
+.activador{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     transition-duration: .5s;
     transition-timing-function: cubic-bezier(.2,.42,1,1.11);
-    filter: saturate(1.2) contrast(1.1);
 }
 .toolTip {
     visibility: hidden;
-    display: flex;
-    align-items: center;
-    padding: 4px 10px;
-    border-radius: 3px;
-    max-height: 20px;
-    position: absolute;
-    margin-top: -50px;
-    background-color: #000;
-    z-index: 5;
-    text-align: center;
     user-select: none;
+    height: 10px;
     transition-duration: .5s;
+    transition-timing-function: cubic-bezier(.2,.42,1,1.11);
 }
-
-.typeImg:hover .toolTip {
-    visibility: visible;
-}
-.typeImg:hover {
+.activador:hover {
     transition-duration: .5s;
     transition-timing-function: cubic-bezier(0,1.08,1,.89);
-    transform: scale(1.03);
+    transform: translateY(-20px)
+}
+.activador:hover .toolTip {
+    visibility: visible;
+    transform: translateY(35px);
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(0,1.08,1,.89);
 }
 
 .dimensionesText{    
@@ -127,5 +126,10 @@
 .homeButton:focus{
     border: none;
     outline: none;
+}
+
+.typesContainer {
+    display: flex;
+    flex-direction: row;
 }
 
