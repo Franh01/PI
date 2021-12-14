@@ -4,7 +4,7 @@ import * as allImages from '../../img/pokeImages'
 import { useNavigate } from 'react-router-dom';
 import defaultImg from '../../img/questionMark.png';
 
-export default function PokemonCard({ name, img, type }) {
+export default function PokemonCard({ name, img, type, id }) {
     const navigate = useNavigate();
     const bugC = '#3c9950';
     const darkC = '#040707';
@@ -98,62 +98,45 @@ export default function PokemonCard({ name, img, type }) {
         e.target.src = defaultImg;
     }
     return (
-        <div>
-            {img ?                
-                    <div>
-                        <div onClick={()=>handleOnClick()} className={s.card} style={
-                            {
-                                background: `radial-gradient(circle, ${color}7f 70%, ${color} 100%)`,
-                                border: '5px solid',
-                                borderImageSlice: '1',
-                                borderWidth: '10px',
-                                borderImageSource: `radial-gradient(circle, ${color}7f 75%, ${color} 100%)`
-                            }}>
-                            <div className={s.content}>
-                                <div className={s.nameContainer}>
-                                    <h2>{upperName}</h2>                        
-                                </div>
-
-                                <div className={s.imgContainer}>
-                                <img className={s.image} src={img} alt={name}
-                                    onError={(e) => addDefaultImg(e)}/>
-                                </div>
-
-                                <div className={s.typeContainer}>
-                                        <h3>{upperType}</h3>
-                                        <div>
-                                            <img className={s.typeImg} src={typeImg} alt="typeImg"/>
-                                        </div>
-                                </div>
-                            </div>
+        <div> 
+            <div>
+                <div
+                    onClick={() => handleOnClick()}
+                    className={s.card}
+                    style={
+                    {
+                        background: `radial-gradient(circle, ${color}7f 70%, ${color} 100%)`,
+                        border: '5px solid',
+                        borderImageSlice: '1',
+                        borderWidth: '10px',
+                        borderImageSource: `radial-gradient(circle, ${color}7f 75%, ${color} 100%)`
+                    }}>
+                    
+                    <div className={s.content}>
+                    
+                        <div className={s.nameContainer}>
+                            <h2>{upperName}</h2>                        
                         </div>
-                    </div>
-                :
-                    <div>
-                        <div onClick={()=>handleOnClick()} className={s.card} style={
-                            {
-                                background: `radial-gradient(circle, ${color}7f 70%, ${color} 100%)`,
-                                border: '5px solid',
-                                borderImageSlice: '1',
-                                borderWidth: '10px',
-                                borderImageSource: `radial-gradient(circle, ${color}7f 75%, ${color} 100%)`
-                            }}>
-                            <div className={s.content}>
-                                <div className={s.nameContainer}>
-                                    <h2>{upperName}</h2>                        
-                                </div>
-                                
-                                <div className={s.imgContainer}>
-                                    <img className={s.image} src={defaultImg} alt={name}/>
-                                </div>
 
-                                <div className={s.typeContainer}>
-                                    <h3>{upperType}</h3>
+                        <div className={s.imgContainer}>
+                            <img
+                                className={s.image}
+                                src={img} alt={name}
+                                onError={(e) => addDefaultImg(e)}
+                            />
+                        </div>
+
+                        <div className={s.typeContainer}>
+                                <h3>{upperType}</h3>
+                                <div>
                                     <img className={s.typeImg} src={typeImg} alt="typeImg"/>
                                 </div>
-                            </div>
                         </div>
-                    </div>}
+
+                    </div>
                 </div>
+            </div>
+                
+        </div>
     )
 };

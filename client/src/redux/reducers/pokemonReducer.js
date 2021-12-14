@@ -1,8 +1,9 @@
-import { GET_POKEMONS, GET_POKEMONS_FILTERED, GET_TYPES } from '../actions/actionTypes';
+import { GET_POKEMONS, GET_POKEMONS_FILTERED, GET_TYPES, SORT_BY_TYPE } from '../actions/actionTypes';
 
 const initialState = {    
     pokemons: [],
     types: [],
+    sortBy: 'todos'
 };
 
 const postsReducer = (state = initialState, action) => {
@@ -22,6 +23,11 @@ const postsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 pokemons: payload
+            }
+        case SORT_BY_TYPE:
+            return {
+                ...state,
+                sortBy: payload
             }
         default:
             return state;

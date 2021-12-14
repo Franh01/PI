@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import homeImg from '../../img/pixelspoke.png'
 import searchIco from '../../img/searchIcon.png'
 import { useDispatch, useSelector } from 'react-redux';
-import { getPokemons, getPokemonsFiltered, getTypes } from '../../redux/actions/pokemon';
+import { getPokemons, getPokemonsFiltered, getTypes, sortByType } from '../../redux/actions/pokemon';
 import { useState } from 'react';
 
 export default function NavBar() {
@@ -31,16 +31,24 @@ export default function NavBar() {
         dispatch(getPokemons(''))
     }
     //* FILTRO DE TIPO
-    const [type, setType] = useState('');
+    const [type, setType] = useState('todos');
+    const pokemons = useSelector((state) => state.pokemonReducer.pokemons)
     function typeFilterButton() {
+        dispatch(sortByType(type))
         console.log(type)
+        // console.log(pokemons.filter(t => t.tipos.find(p=>p.name === type)))
+        
     }
 
     //* FILTRO DE ORDEN
     const [filter, setFilter] = useState('');
     const [orderBy, setOrderBy] = useState('');
     function orderFilterButton() {
-        dispatch(getPokemonsFiltered(filter, orderBy))
+        if (filter === '---' || orderBy === '---') {
+            dispatch(getPokemons(''))
+        } else {
+            dispatch(getPokemonsFiltered(filter, orderBy))
+        }
     }
 
 

@@ -95,7 +95,7 @@ router.get('/pokemons', async function (req, res) {
         try {
             const pokemonNames = await Pokemon.findAll({
                 order: [[filter, orderBy]],
-                attributes: ['name', 'imgUrl'],
+                attributes: ['name', 'imgUrl', 'id'],
                 include: {
                     model: Tipo
                 }
@@ -108,7 +108,7 @@ router.get('/pokemons', async function (req, res) {
     } else {
         try {
             const pokemonNames = await Pokemon.findAll({
-                attributes: ['name', 'imgUrl'],
+                attributes: ['name', 'imgUrl', 'id'],
                 include: {
                     model: Tipo
                 }

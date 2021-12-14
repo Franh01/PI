@@ -1,0 +1,15 @@
+.mainContainer 
+{
+    font-family: 'Poppins';
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    margin-top: 80px;
+    margin-bottom: -50px;
+}
+
+.buttons
+{
+    margin: 0px 2px;
+}

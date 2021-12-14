@@ -4,11 +4,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getPokemons } from '../../redux/actions/pokemon';
 import NavBar from '../navBar/NavBar';
-import Loading from '../loading/Loading';
+import Paginado from '../paginado/Paginado';
 
 export default function Pokemons() {
     const dispatch = useDispatch()
     const pokemons = useSelector((state) => state.pokemonReducer.pokemons);
+    let pokemonsFiltered = pokemons;
+    const typeFilter = useSelector((state) => state.pokemonReducer.sortBy);
+    console.log(typeFilter)
+    if (typeFilter === 'todos') {
+        pokemonsFiltered = pokemons
+    } else {
+        pokemonsFiltered = pokemons.filter(t => t.tipos.find(p => p.name === typeFilter))
+    }
+    
 
     useEffect(() => {
         dispatch(getPokemons(''))
@@ -22,44 +31,69 @@ export default function Pokemons() {
             </div>
         )
     }
-    if (pokemons.length === 0) {
+    if (pokemonsFiltered.length === 0) {
         return (
             <div>
-                <Loading/>
+                <NavBar/>
+                <h3 style={{marginTop: '5%', marginLeft: '2%', color: 'black'}}>No se encuentran pokemons con el tipo seleccionado</h3>
             </div>
         )
     }
-    return (
-        <div>
-            <div className={s.navBarContainer}>
-                <NavBar/>
-            </div>
-            
-            <div className={s.container}>
-                {pokemons !== null && pokemons.length === undefined ?
+    if (pokemons !== null && pokemons.length === undefined) {
+        return (
+            <div>
+                <div className={s.navBarContainer}>
+                    <NavBar/>
+                </div>
+                <div className={s.paginadoContainer}>
+                    <Paginado/>
+                </div>
+
+                <div className={s.container}>
                     <PokemonCard
                         key={pokemons.id}
                         name={pokemons.name}
                         img={pokemons.imgUrl}
                         type={pokemons.tipos.map(p=>p.name)}
-                    /> : <span style={{display: 'none'}} />}
-                {pokemons !== null && pokemons.length
-                    ?
-                    pokemons.map(p => (
-                        
+                    />
+                </div>
+            </div>
+        )
+    } else if (pokemons !== null && pokemons.length) {
+        return (
+            <div>
+                <div className={s.navBarContainer}>
+                    <NavBar/>
+                </div>
+                <div className={s.paginadoContainer}>
+                    <Paginado/>
+                </div>
+                <div className={s.container}>
+                    {pokemonsFiltered.map(p => (
                         <PokemonCard
                             key={p.id}
                             name={p.name}
                             img={p.imgUrl}
                             type={p.tipos.map(p => p.name)}
                         />
-                    ))
-                    : <span style={{ display: 'none' }} />}
-                {pokemons === null ?
+                    ))}
+                </div>
+            </div>
+        )
+    } else if (pokemons === null) {
+        return (
+            <div>
+                <div className={s.navBarContainer}>
+                    <NavBar/>
+                </div>
+                <div className={s.paginadoContainer}>
+                    <Paginado/>
+                </div>
+                <div className={s.container}>
                     <div className={s.warning}>El pokemon ingresado no se encuentra</div>
-                    :
-                    <span style={{display: 'none'}} />}
-            </div>    
-        </div>
-    )
+                </div>
+            </div>
+        )
+        
+    }
 }
