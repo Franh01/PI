@@ -85,7 +85,7 @@ router.get('/pokemons', async function (req, res) {
                 where: { name: name },
                 include: { model: Tipo }
             });
-            res.json(pokemonSearch).status(200);
+            return res.json(pokemonSearch).status(200);
         } catch (e) {
             console.log(e)
             res.json(`No existe un pokemon con el nombre ${name}`).status(404)

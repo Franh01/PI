@@ -20,14 +20,7 @@ export default function PokemonFiltered() {
     const pokemons = useSelector((data) => data.pokemonReducer.pokemons);
 
 
-    if (pokemons.length > 1) {
-        dispatch(getPokemons(pokeUrl))
-        return (
-            <div>
-                <Loading/>
-            </div>
-        )
-    }
+    
     if (pokemons === null) {
         return (
             <div>
@@ -36,6 +29,15 @@ export default function PokemonFiltered() {
         )
     }
 
+    if (pokemons.length > 1) {
+        dispatch(getPokemons(pokeUrl))
+        return (
+            <div>
+                <Loading/>
+            </div>
+        )
+    }
+    
     if (pokemons.length === 0) {
         dispatch(getPokemons(pokeUrl))
         return (

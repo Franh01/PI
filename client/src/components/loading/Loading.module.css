@@ -1,3 +1,6 @@
+body {
+    background-color: #ffce45;
+}
 .loading {
     display: flex;
     position: absolute;

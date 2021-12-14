@@ -1,3 +1,37 @@
-.mainContainer {
+.mainContainer 
+{
     font-family: 'Poppins';
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.errorText 
+{
+    font-size: 100px;
+}
+
+.errorPar
+{
+    margin-top: -60px;
+    font-size: 30px;
+}
+
+.backButton 
+{
+    font-family: inherit;
+    border-radius: 36px;
+    padding: 8px 14px;
+    border: none;
+    background-color: #ffffff;
+    cursor: pointer;
+    transition-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);;
+    transition-duration: .5s;
+}
+
+.backButton:hover {
+    background-color: #e90a0a;
+    transform: scale(1.1, 1.1);
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: .5s;
 }

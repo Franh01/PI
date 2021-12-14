@@ -13,6 +13,7 @@ export default function Pokemons() {
     useEffect(() => {
         dispatch(getPokemons(''))
     }, [])
+    
     if (pokemons === null) {
         return (
             <div>
