@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { getPokemons } from '../../redux/actions/pokemon';
 import NavBar from '../navBar/NavBar';
+import Loading from '../loading/Loading'
 
 export default function Pokemons() {
     const dispatch = useDispatch()
@@ -28,11 +29,20 @@ export default function Pokemons() {
             setCurrentPage(currentPage - 1)
         }
     }
-
     useEffect(() => {
         setPage(0)
         setCurrentPage(1)
     }, [userFilter])
+    useEffect(() => {
+        dispatch(getPokemons(''))
+    }, [])
+    if (pokemonsFiltered.length === 0) {
+        return (
+            <div>
+                <Loading/>
+            </div>
+        )
+    }
     //* FILTRO DE CREADO O NO POR EL WACHIN
     if (pokemons !== null && pokemons.length > 1) {
         if (userFilter === 'Todos') {
@@ -56,9 +66,6 @@ export default function Pokemons() {
         }
     }
     
-    useEffect(() => {
-        dispatch(getPokemons(''))
-    }, [])
     
     if (pokemons === null) {
         return (

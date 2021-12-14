@@ -59,9 +59,6 @@ const getApiInfo = async () => {
             console.log(e)
         })
 }
-setTimeout(() => {
-    getApiInfo()
-}, 2000);
 
 router.get('/pokemons/:id', async function (req, res) {
     const { id } = req.params;
@@ -76,10 +73,11 @@ router.get('/pokemons/:id', async function (req, res) {
             console.log(e)
             res.json(`No existe un pokemon con el id ${id}`).status(404)
         }
-});
-
-
-router.get('/pokemons', async function (req, res) {
+    });
+    
+    
+    router.get('/pokemons', async function (req, res) {
+    getApiInfo()
     const { filter, orderBy, name } = req.query;
     if (name) {
         try {
