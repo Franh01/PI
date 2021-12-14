@@ -36,12 +36,14 @@ export default function Pokemons() {
     useEffect(() => {
         dispatch(getPokemons(''))
     }, [])
-    if (pokemonsFiltered.length === 0) {
-        return (
-            <div>
-                <Loading/>
-            </div>
-        )
+    if (pokemonsFiltered !== null) {
+        if (pokemonsFiltered.length === 0) {
+            return (
+                <div>
+                    <Loading/>
+                </div>
+            )
+        }
     }
     //* FILTRO DE CREADO O NO POR EL WACHIN
     if (pokemons !== null && pokemons.length > 1) {

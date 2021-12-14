@@ -24,7 +24,7 @@
 {
     display: inherit;
     align-items: center;
-    padding-right: 88.17px;
+    padding-right: 183.17px;
 }
 
 .filters
@@ -79,9 +79,75 @@
 {
     font-family: inherit;
     min-height: 26px;
+    border: none;
+    background-color: rgb(238, 238, 238);
+    padding: 5px 5px;
+}
+.fonting:hover
+{
+    background-color: rgb(255, 255, 255);
+}
+
+.fontingIzq
+{
+    font-family: inherit;
+    min-height: 26px;
+    border: none;
+    background-color: rgb(238, 238, 238);
+    border-radius: 5px 0px 0px 5px;
+    padding: 5px 5px;
+}
+
+.fontingIzq:hover
+{
+    background-color: rgb(255, 255, 255);
+}
+
+.filterButtons
+{
+    font-family: inherit;
+    min-height: 26px;
+    border-radius: 0px 5px 5px 0px;
+    border: none;
+    background-color: #ffc600;
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(.2,.42,1,1.11);
+    cursor: pointer;
+    padding: 5px 5px;
+}
+
+.filterButtons:hover
+{
+    background-color: #e90a0a;
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(0,1.08,1,.89);
+}
+
+.createPokemon
+{
+    cursor: pointer;
+    font-family: inherit;
+    min-height: 26px;
+    border-radius: 5px;
+    border: none;
+    background-color: #ffc600;
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(.2,.42,1,1.11);
+    padding: 5px 5px;
+}
+
+.createPokemon:hover
+{
+    background-color: #e90a0a;
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(0,1.08,1,.89);
 }
 
 .fonting:focus 
+{
+    outline: none;
+}
+.fontingIzq:focus 
 {
     outline: none;
 }

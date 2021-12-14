@@ -66,11 +66,11 @@ export default function NavBar() {
                 </div>
             </div>
             
-            <div className={s.navComp}><Link to='/pokemons/createpokemon'><button className={s.fonting}>Crear Pokemon</button></Link></div>
+            <div className={s.navComp}><Link to='/pokemons/createpokemon'><button className={s.createPokemon}>Crear Pokemon</button></Link></div>
 
             <div className={s.filters}>
                 <div className={s.navComp}>
-                    <select className={s.fonting} value={createdByUser} onChange={(e) => setCreatedByUser(e.target.value)}>User, database
+                    <select className={s.fontingIzq} value={createdByUser} onChange={(e) => setCreatedByUser(e.target.value)}>User, database
                         <option>Todos</option>
                         <option>Usuario</option>
                         <option>API</option>
@@ -80,11 +80,11 @@ export default function NavBar() {
                         <option defaultValue>Todos</option>
                         {tipos.map(t => <option value={t} key={t}>{t.charAt(0).toUpperCase()+t.slice(1)}</option>)}
                     </select>
-                    <button className={s.fonting} onClick={() => typeFilterButton()}>Aplicar</button>
+                    <button className={s.filterButtons} onClick={() => typeFilterButton()}>Aplicar</button>
                 </div>
 
                 <div className={s.navComp}>
-                    <select className={s.fonting} value={filter} onChange={(e)=> setFilter(e.target.value)}>
+                    <select className={s.fontingIzq} value={filter} onChange={(e)=> setFilter(e.target.value)}>
                         <option defaultValue>---</option>
                         <option value='name'>Nombre</option>
                         <option value='strength'>Fuerza</option>
@@ -94,7 +94,7 @@ export default function NavBar() {
                         <option>ASC</option>
                         <option>DESC</option>
                     </select>
-                    <button className={s.fonting} onClick={() => orderFilterButton()}>Aplicar</button>
+                    <button className={s.filterButtons} onClick={() => orderFilterButton()}>Aplicar</button>
                 </div>
             </div>
             
