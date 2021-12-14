@@ -1,7 +1,7 @@
 import s from './Pokemons.module.css';
 import PokemonCard from '../pokemonCard/PokemonCard';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getPokemons } from '../../redux/actions/pokemon';
 import NavBar from '../navBar/NavBar';
 import Paginado from '../paginado/Paginado';
@@ -11,15 +11,35 @@ export default function Pokemons() {
     const pokemons = useSelector((state) => state.pokemonReducer.pokemons);
     let pokemonsFiltered = pokemons;
     const typeFilter = useSelector((state) => state.pokemonReducer.sortBy);
-    if (pokemons !== null) {
+    //* PAGINADO
+    const [page, setPage] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
+    
+    
+    if (pokemons !== null && pokemons.length > 1) {
         if (typeFilter === 'todos') {
-            pokemonsFiltered = pokemons
+            if (page === 0) {
+                pokemonsFiltered = pokemons.slice(page, page + 9);
+            } else {
+                pokemonsFiltered = pokemons.slice(page, page + 12);
+            }
         } else {
             pokemonsFiltered = pokemons.filter(t => t.tipos.find(p => p.name === typeFilter))
         }
     }
-    
-    
+
+    function nextPage() {
+        if (pokemons.length > page + 12 && typeFilter === 'todos') {
+            setPage(page + 12)
+            setCurrentPage(currentPage + 1)
+        }
+    }
+    function prevPage() {
+        if (page > 0) {
+            setPage(page - 12)
+            setCurrentPage(currentPage - 1)
+        }
+    }
 
     useEffect(() => {
         dispatch(getPokemons(''))
@@ -47,9 +67,6 @@ export default function Pokemons() {
                 <div className={s.navBarContainer}>
                     <NavBar/>
                 </div>
-                <div className={s.paginadoContainer}>
-                    <Paginado/>
-                </div>
 
                 <div className={s.container}>
                     <PokemonCard
@@ -68,7 +85,9 @@ export default function Pokemons() {
                     <NavBar/>
                 </div>
                 <div className={s.paginadoContainer}>
-                    <Paginado/>
+                    <button onClick={() => prevPage()}>Pagina anterior</button>
+                    <h5 style={{color: 'black'}}>{currentPage}</h5>
+                    <button onClick={()=>nextPage()}>Pagina siguiente</button>
                 </div>
                 <div className={s.container}>
                     {pokemonsFiltered.map(p => (
