@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import homeImg from '../../img/pixelspoke.png'
 import searchIco from '../../img/searchIcon.png'
 import { useDispatch, useSelector } from 'react-redux';
-import { getPokemons, getPokemonsFiltered, getTypes, sortByType } from '../../redux/actions/pokemon';
+import { getPokemons, getPokemonsFiltered, getTypes, sortByCreatedBy, sortByType } from '../../redux/actions/pokemon';
 import { useState } from 'react';
 
 export default function NavBar() {
@@ -39,7 +39,9 @@ export default function NavBar() {
     }
     //* FILTRO DE TIPO
     const [type, setType] = useState('todos');
+    const [createdByUser, setCreatedByUser] = useState('Todos');
     function typeFilterButton() {
+        dispatch(sortByCreatedBy(createdByUser))
         dispatch(sortByType(type))
         // console.log(pokemons.filter(t => t.tipos.find(p=>p.name === type)))
         
@@ -56,7 +58,6 @@ export default function NavBar() {
         }
     }
 
-
     return (
         <div className={s.navBarContainer}>
             <div className={s.homeAndSearch}>
@@ -72,7 +73,13 @@ export default function NavBar() {
 
             <div className={s.filters}>
                 <div className={s.navComp}>
-                    <select className={s.fonting} value={type} onChange={(e)=> setType(e.target.value)}>
+                    <select className={s.fonting} value={createdByUser} onChange={(e) => setCreatedByUser(e.target.value)}>User, database
+                        <option>Todos</option>
+                        <option>Usuario</option>
+                        <option>API</option>
+                    </select>
+
+                    <select className={s.fonting} value={type} onChange={(e) => setType(e.target.value)}>
                         <option defaultValue>todos</option>
                         {tipos.map(makeItem)}
                     </select>

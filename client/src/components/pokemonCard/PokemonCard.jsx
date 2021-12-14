@@ -75,7 +75,7 @@ export default function PokemonCard({ name, img, type }) {
             setTypeImg(allImages.default.flying)
         } else if (type[0] === 'ice' && color !== iceC) {
             setColor(iceC);
-            setTypeImg(allImages.default.flying)
+            setTypeImg(allImages.default.ice)
         } else if (type[0] === 'psychic' && color !== psychicC) {
             setColor(psychicC);
             setTypeImg(allImages.default.flying)

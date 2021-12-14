@@ -29,7 +29,8 @@ const getApiInfo = async () => {
                 strength: e.stats[1].base_stat,
                 defense: e.stats[2].base_stat,
                 speed: e.stats[5].base_stat,
-                types: e.types.map(t=>t.type.name)
+                types: e.types.map(t => t.type.name),
+                pokemonId: e.id
             }))
             
             resultados.map(r => Pokemon.create({
@@ -41,7 +42,8 @@ const getApiInfo = async () => {
                 strength: r.strength,
                 defense: r.defense,
                 speed: r.speed,
-                // types: r.types
+                id: r.pokemonId,
+                createdByUser: false
             })
                 .then(create => {
                     create.setTipos(r.types)

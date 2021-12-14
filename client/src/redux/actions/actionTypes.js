@@ -3,3 +3,4 @@ export const CREATE_POKEMON = 'CREATE_POKEMON';
 export const GET_TYPES = 'GET_TYPES';
 export const GET_POKEMONS_FILTERED = 'GET_POKEMONS_FILTERED';
 export const SORT_BY_TYPE = 'SORT_BY_TYPE';
+export const SORT_BY_CREATED_BY = 'SORT_BY_CREATED_BY';

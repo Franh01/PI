@@ -12,12 +12,10 @@
     min-width: 100px;
 }
 
-.warning
+.notFound
 {
-    display: flex;
-    margin-left: 2%;
-    margin-top: 40px;
-    font-size: 50px;
+    font-family: 'Poppins';
+    font-size: 30px;
 }
 
 .paginadoContainer 
@@ -26,6 +24,7 @@
     justify-content: center;
     margin: 80px 22px -60px 0;
     align-items: center;
+    font-family: 'Press Start 2P';
 }
 
 .paginadoInferiorContainer
@@ -34,6 +33,7 @@
     justify-content: center;
     align-items: center;
     margin: 80px 22px -60px 0;
+    font-family: 'Press Start 2P';
 }
 
 .paginadoButton

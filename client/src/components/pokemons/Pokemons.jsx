@@ -10,23 +10,12 @@ export default function Pokemons() {
     const pokemons = useSelector((state) => state.pokemonReducer.pokemons);
     let pokemonsFiltered = pokemons;
     const typeFilter = useSelector((state) => state.pokemonReducer.sortBy);
+    const userFilter = useSelector((state) => state.pokemonReducer.sortByCreatedBy);
     //* PAGINADO
     const [page, setPage] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     
     
-    if (pokemons !== null && pokemons.length > 1) {
-        if (typeFilter === 'todos') {
-            if (page === 0) {
-                pokemonsFiltered = pokemons.slice(page, page + 9);
-            } else {
-                pokemonsFiltered = pokemons.slice(page, page + 12);
-            }
-        } else {
-            pokemonsFiltered = pokemons.filter(t => t.tipos.find(p => p.name === typeFilter))
-        }
-    }
-
     function nextPage() {
         if (pokemons.length > page + 12 && typeFilter === 'todos') {
             setPage(page + 12)
@@ -40,6 +29,29 @@ export default function Pokemons() {
         }
     }
 
+    //* FILTRO DE CREADO O NO POR EL WACHIN
+    if (pokemons !== null && pokemons.length > 1) {
+        if (userFilter === 'Todos') {
+            pokemonsFiltered = pokemonsFiltered
+        } else if (userFilter === 'Usuario') {
+            pokemonsFiltered = pokemons.filter(u => u.id.length > 2)
+        } else if (userFilter === 'API') {
+            pokemonsFiltered = pokemonsFiltered.filter(u => u.id.length <= 2)
+        }
+        
+    }
+    if (pokemons !== null && pokemons.length) {
+        if (typeFilter === 'todos') {
+            if (page === 0) {
+                pokemonsFiltered = pokemonsFiltered.slice(page, page + 9);
+            } else {
+                pokemonsFiltered = pokemonsFiltered.slice(page, page + 12);
+            }
+        } else {
+            pokemonsFiltered = pokemonsFiltered.filter(t => t.tipos.find(p => p.name === typeFilter))
+        }
+    }
+    
     useEffect(() => {
         dispatch(getPokemons(''))
     }, [])
@@ -48,13 +60,13 @@ export default function Pokemons() {
         return (
             <div>
                 <NavBar/>
-                <h3 style={{marginTop: '5%', marginLeft: '2%', color: 'black'}}>El pokemon ingresado no se encuentra</h3>
+                <h3 className={s.notFound}style={{marginTop: '5%', marginLeft: '2%', color: 'black'}}>El pokemon ingresado no se encuentra</h3>
             </div>
         )
     }
     if (pokemonsFiltered.length === 0) {
         return (
-            <div>
+            <div style={{fontFamily: 'Poppins'}}>
                 <NavBar/>
                 <h3 style={{marginTop: '5%', marginLeft: '2%', color: 'black'}}>No se encuentran pokemons con el tipo seleccionado</h3>
             </div>
@@ -78,12 +90,13 @@ export default function Pokemons() {
             </div>
         )
     } else if (pokemons !== null && pokemons.length) {
+        console.log(page)
         return (
             <div>
                 <div className={s.navBarContainer}>
                     <NavBar/>
                 </div>
-                <div className={s.paginadoContainer}>
+                {pokemonsFiltered.length >= 9 || page > 9 ? <div className={s.paginadoContainer}>
                     <button className={s.paginadoButton} onClick={() => prevPage()}>{`<`}</button>
                     <div>
                         <h5
@@ -95,7 +108,7 @@ export default function Pokemons() {
                         </h5>
                     </div>
                     <button className={s.paginadoButton} onClick={()=>nextPage()}>{`>`}</button>
-                </div>
+                </div> : <span style={{display: 'none'}}/>}
                 <div className={s.container}>
                     {pokemonsFiltered.map(p => (
                         <PokemonCard
@@ -106,33 +119,7 @@ export default function Pokemons() {
                         />
                     ))}
                 </div>
-                <div className={s.paginadoInferiorContainer}>
-                    <button className={s.paginadoButton} onClick={() => prevPage()}>{`<`}</button>
-                    <div>
-                        <h5
-                            style={{
-                                color: 'black',
-                                userSelect: 'none'
-                            }}>
-                            {currentPage}
-                        </h5>
-                    </div>
-                    <button className={s.paginadoButton} onClick={()=>nextPage()}>{`>`}</button>
-                </div>                
             </div>
         )
-    } else if (pokemons === null) {
-        return (
-            <div>
-                <div className={s.navBarContainer}>
-                    <NavBar/>
-                </div>
-                
-                <div className={s.container}>
-                    <div className={s.warning}>El pokemon ingresado no se encuentra</div>
-                </div>
-            </div>
-        )
-        
     }
 }

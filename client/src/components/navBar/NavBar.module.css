@@ -1,5 +1,6 @@
 
-.navBarContainer {
+.navBarContainer 
+{
     background-color: rgb(251, 251, 251, 98%);
     display: flex;
     position: fixed;
@@ -9,43 +10,49 @@
     padding: 5px 0px 5px 0px;
     z-index: 21031;
     top: 0;
-    /* border-bottom: 7px solid rgb(255, 0, 0, 70%); */
     border-bottom: 7px solid rgb(255,206,69);
     align-items: center;
     font-family: 'Poppins';
 }
 
-.navComp{
+.navComp
+{
     padding: 0px 20px;
 }
 
-.homeAndSearch{
+.homeAndSearch
+{
     display: inherit;
     align-items: center;
     padding-right: 88.17px;
 }
 
-.filters{
+.filters
+{
     display: inherit;
 }
 
-.homeImg{
+.homeImg
+{
     max-height: 50px;
     background-color: rgb(251, 251, 251, 98%);
 }
 
-.searchBar{
+.searchBar
+{
     padding: 10px 10px;
     border-radius: 10px 0px 0px 10px;
     border: none;
     background-color: rgb(235 235 235);
 }
 
-.searchBar:focus{
+.searchBar:focus
+{
     outline: none;
 }
 
-.searchButton{
+.searchButton
+{
     min-height: 35.12px;
     position: absolute;
     border-radius: 0px 10px 10px 0px;
@@ -56,16 +63,25 @@
     transition-timing-function: cubic-bezier(.2,.42,1,1.11);
 }
 
-.searchButton:hover {
+.searchButton:hover 
+{
     background-color: #e90a0a;
     transition-duration: .5s;
     transition-timing-function: cubic-bezier(0,1.08,1,.89);
 }
 
-.searchIcon {
+.searchIcon 
+{
     max-width: 30px;
 }
 
-.fonting {
+.fonting 
+{
     font-family: inherit;
+    min-height: 26px;
+}
+
+.fonting:focus 
+{
+    outline: none;
 }
