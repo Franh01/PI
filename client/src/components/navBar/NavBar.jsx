@@ -27,10 +27,12 @@ export default function NavBar() {
         }
     }
     function homeBtn() {
-        setName('')
-        dispatch(getPokemons(''))
-        setType('todos')
-        dispatch(sortByType('todos'))
+        setName('');
+        dispatch(getPokemons(''));
+        setType('todos');
+        dispatch(sortByType('todos'));
+        setFilter('---');
+        setOrderBy('---');
     }
     //* FILTRO DE TIPO
     const [type, setType] = useState('todos');

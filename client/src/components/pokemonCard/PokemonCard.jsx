@@ -4,7 +4,7 @@ import * as allImages from '../../img/pokeImages'
 import { useNavigate } from 'react-router-dom';
 import defaultImg from '../../img/questionMark.png';
 
-export default function PokemonCard({ name, img, type, id }) {
+export default function PokemonCard({ name, img, type }) {
     const navigate = useNavigate();
     const bugC = '#3c9950';
     const darkC = '#040707';
@@ -29,6 +29,7 @@ export default function PokemonCard({ name, img, type, id }) {
     
 
     const [typeImg, setTypeImg] = useState('');
+    const [typeImg1, setTypeImg1] = useState('');
     
         if (type[0] === 'poison' && color !== poisonC) {
             setColor(poisonC);
@@ -84,9 +85,54 @@ export default function PokemonCard({ name, img, type, id }) {
         } else if (type[0] === 'steel' && color !== steelC) {
             setColor(steelC);
             setTypeImg(allImages.default.flying)
+    }
+    
+    if (type[1]) {
+        if (type[1] === 'poison' && typeImg1 !== allImages.default.poison) {
+            setTypeImg1(allImages.default.poison)
+        } else if (type[1] === 'bug' && typeImg1 !== allImages.default.bug) {
+            setTypeImg1(allImages.default.bug)
+        } else if (type[1] === 'water' && typeImg1 !== allImages.default.water) {
+            setTypeImg1(allImages.default.water)
+        } else if (type[1] === 'grass' && typeImg1 !== allImages.default.grass) {
+            setTypeImg1(allImages.default.grass)
+        } else if (type[1] === 'fire' && typeImg1 !== allImages.default.fire) {
+            setTypeImg1(allImages.default.fire)
+        } else if (type[1] === 'fairy' && typeImg1 !== allImages.default.fairy) {
+            setTypeImg1(allImages.default.fairy)
+        } else if (type[1] === 'normal' && typeImg1 !== allImages.default.normal) {
+            setTypeImg1(allImages.default.normal)
+        } else if (type[1] === 'electric' && typeImg1 !== allImages.default.electric) {
+            setTypeImg1(allImages.default.electric)
+        } else if (type[1] === 'ground' && typeImg1 !== allImages.default.ground) {
+            setTypeImg1(allImages.default.ground)
+        } else if (type[1] === 'flying' && typeImg1 !== allImages.default.flying) {
+            setTypeImg1(allImages.default.flying)
+        } else if (type[1] === 'dark' && typeImg1 !== allImages.default.dark) {
+            setTypeImg1(allImages.default.flying)
+        } else if (type[1] === 'dragon' && typeImg1 !== allImages.default.dragon) {
+            setTypeImg1(allImages.default.flying)
+        } else if (type[1] === 'fighting' && typeImg1 !== allImages.default.fighting) {
+            setTypeImg1(allImages.default.fighting)
+        } else if (type[1] === 'ghost' && typeImg1 !== allImages.default.ghost) {
+            setTypeImg1(allImages.default.flying)
+        } else if (type[1] === 'ice' && typeImg1 !== allImages.default.ice) {
+            setTypeImg1(allImages.default.flying)
+        } else if (type[1] === 'psychic' && typeImg1 !== allImages.default.psychic) {
+            setTypeImg1(allImages.default.flying)
+        } else if (type[1] === 'rock' && typeImg1 !== allImages.default.rock) {
+            setTypeImg1(allImages.default.flying)
+        } else if (type[1] === 'steel' && typeImg1 !== allImages.default.steel) {
+            setTypeImg1(allImages.default.steel)
         }
+    }
+
     let upperName = name.toUpperCase().slice(0, 1) + name.slice(1, name.length);
     let upperType = type[0].toUpperCase().slice(0, 1) + type[0].slice(1, type[0].length);
+    let upperType1 = '';
+    if (type[1]) {
+        upperType1 = type[1].toUpperCase().slice(0, 1) + type[1].slice(1, type[1].length);
+    }
 
     function handleOnClick() {
         setTimeout(() => {
@@ -97,46 +143,97 @@ export default function PokemonCard({ name, img, type, id }) {
     function addDefaultImg(e){
         e.target.src = defaultImg;
     }
-    return (
-        <div> 
-            <div>
-                <div
-                    onClick={() => handleOnClick()}
-                    className={s.card}
-                    style={
-                    {
-                        background: `radial-gradient(circle, ${color}7f 70%, ${color} 100%)`,
-                        border: '5px solid',
-                        borderImageSlice: '1',
-                        borderWidth: '10px',
-                        borderImageSource: `radial-gradient(circle, ${color}7f 75%, ${color} 100%)`
-                    }}>
-                    
-                    <div className={s.content}>
-                    
-                        <div className={s.nameContainer}>
-                            <h2>{upperName}</h2>                        
+    if (!type[1]) {
+        return (
+            <div> 
+                <div>
+                    <div
+                        onClick={() => handleOnClick()}
+                        className={s.card}
+                        style={
+                        {
+                            background: `radial-gradient(circle, ${color}7f 70%, ${color} 100%)`,
+                            border: '5px solid',
+                            borderImageSlice: '1',
+                            borderWidth: '10px',
+                            borderImageSource: `radial-gradient(circle, ${color}7f 75%, ${color} 100%)`
+                        }}>
+                        
+                        <div className={s.content}>
+                        
+                            <div className={s.nameContainer}>
+                                <h2>{upperName}</h2>                        
+                            </div>
+    
+                            <div className={s.imgContainer}>
+                                <img
+                                    className={s.image}
+                                    src={img} alt={name}
+                                    onError={(e) => addDefaultImg(e)}
+                                />
+                            </div>
+    
+                            <div className={s.typeContainer}>
+                                    <div className={s.typeAlign}>
+                                        <h3>{upperType}</h3>
+                                        <img className={s.typeImg} src={typeImg} alt="typeImg"/>
+                                    </div>
+                            </div>
+    
                         </div>
-
-                        <div className={s.imgContainer}>
-                            <img
-                                className={s.image}
-                                src={img} alt={name}
-                                onError={(e) => addDefaultImg(e)}
-                            />
-                        </div>
-
-                        <div className={s.typeContainer}>
-                                <h3>{upperType}</h3>
-                                <div>
-                                    <img className={s.typeImg} src={typeImg} alt="typeImg"/>
-                                </div>
-                        </div>
-
                     </div>
                 </div>
+                    
             </div>
-                
-        </div>
-    )
+        )
+    } else {
+        return (
+            <div> 
+                <div>
+                    <div
+                        onClick={() => handleOnClick()}
+                        className={s.card}
+                        style={
+                        {
+                            background: `radial-gradient(circle, ${color}7f 70%, ${color} 100%)`,
+                            border: '5px solid',
+                            borderImageSlice: '1',
+                            borderWidth: '10px',
+                            borderImageSource: `radial-gradient(circle, ${color}7f 75%, ${color} 100%)`
+                        }}>
+                        
+                        <div className={s.content}>
+                        
+                            <div className={s.nameContainer}>
+                                <h2>{upperName}</h2>                        
+                            </div>
+    
+                            <div className={s.imgContainer}>
+                                <img
+                                    className={s.image}
+                                    src={img} alt={name}
+                                    onError={(e) => addDefaultImg(e)}
+                                />
+                            </div>
+    
+                            <div className={s.typeContainer}>
+                                <div className={s.typeAlign}>
+                                    <h3>{upperType}</h3>
+                                    <img className={s.typeImg} src={typeImg} alt="typeImg"/>
+                                </div>
+
+                                <div className={s.typeAlign}>
+                                    <h3>{upperType1}</h3>
+                                    <img className={s.typeImg} src={typeImg1} alt="typeImg"/>
+                                </div>
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+                    
+            </div>
+        )
+    }
+    
 };

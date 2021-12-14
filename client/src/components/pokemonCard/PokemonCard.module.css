@@ -1,4 +1,5 @@
-.card {
+.card 
+{
     padding: 10px 5px;
     min-height: 400px;
     min-width: 200px;
@@ -16,19 +17,22 @@
     font-family: 'Poppins';
 }
 
-.card:hover {
+.card:hover 
+{
     box-shadow: inset 0 -3em 3em rgb(0 0 0 / 20%), 0 0 0 2px rgb(255 255 255 / 0%), 0.3em 0.3em 1em rgb(0 0 0 / 59%);
     transition-duration: .5s;
     transition-timing-function: cubic-bezier(0,1.08,1,.89);
     transform: scale(1.03, 1.03);
 }
 
-.image {
+.image 
+{
     max-width: 100%;
     filter: drop-shadow(20px 10px 8px #000) saturate(2);
 }
 
-.content {
+.content 
+{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -36,7 +40,8 @@
     min-width: 300px;
 }
 
-.nameContainer {
+.nameContainer 
+{
     display: flex;
     border-bottom: 1px solid #000;
     margin-bottom: 10px;
@@ -47,16 +52,25 @@
     justify-content: center;
 }
 
-.typeContainer {
+.typeContainer 
+{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
 }
 
-.typeImg{
+.typeImg
+{
     max-width: 90px;
     margin-top: -30px;
     filter: saturate(1.2) contrast(1.1);
+}
+
+.typeAlign
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 
