@@ -11,12 +11,14 @@ export default function Pokemons() {
     const pokemons = useSelector((state) => state.pokemonReducer.pokemons);
     let pokemonsFiltered = pokemons;
     const typeFilter = useSelector((state) => state.pokemonReducer.sortBy);
-    console.log(typeFilter)
-    if (typeFilter === 'todos') {
-        pokemonsFiltered = pokemons
-    } else {
-        pokemonsFiltered = pokemons.filter(t => t.tipos.find(p => p.name === typeFilter))
+    if (pokemons !== null) {
+        if (typeFilter === 'todos') {
+            pokemonsFiltered = pokemons
+        } else {
+            pokemonsFiltered = pokemons.filter(t => t.tipos.find(p => p.name === typeFilter))
+        }
     }
+    
     
 
     useEffect(() => {

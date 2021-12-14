@@ -29,13 +29,14 @@ export default function NavBar() {
     function homeBtn() {
         setName('')
         dispatch(getPokemons(''))
+        setType('todos')
+        dispatch(sortByType('todos'))
     }
     //* FILTRO DE TIPO
     const [type, setType] = useState('todos');
     const pokemons = useSelector((state) => state.pokemonReducer.pokemons)
     function typeFilterButton() {
         dispatch(sortByType(type))
-        console.log(type)
         // console.log(pokemons.filter(t => t.tipos.find(p=>p.name === type)))
         
     }
