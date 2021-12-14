@@ -24,7 +24,36 @@
 {
     display: flex;
     justify-content: center;
-    margin: 100px 0 -60px 0;
+    margin: 80px 22px -60px 0;
+    align-items: center;
+}
+
+.paginadoInferiorContainer
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 80px 22px -60px 0;
+}
+
+.paginadoButton
+{
+    font-family: inherit;
+    border-radius: 5px;
+    padding: 12px 10px;
+    border: none;
+    background-color: #ffffff;
+    cursor: pointer;
+    transition-timing-function: cubic-bezier(.17,.67,1,.99);
+    transition-duration: .5s;
+    margin: 0 5px;
+}
+
+.paginadoButton:hover 
+{
+    background-color: #e90a0a;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: .2s;
 }
 
 

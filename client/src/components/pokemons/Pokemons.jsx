@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { getPokemons } from '../../redux/actions/pokemon';
 import NavBar from '../navBar/NavBar';
-import Paginado from '../paginado/Paginado';
 
 export default function Pokemons() {
     const dispatch = useDispatch()
@@ -85,9 +84,17 @@ export default function Pokemons() {
                     <NavBar/>
                 </div>
                 <div className={s.paginadoContainer}>
-                    <button onClick={() => prevPage()}>Pagina anterior</button>
-                    <h5 style={{color: 'black'}}>{currentPage}</h5>
-                    <button onClick={()=>nextPage()}>Pagina siguiente</button>
+                    <button className={s.paginadoButton} onClick={() => prevPage()}>{`<`}</button>
+                    <div>
+                        <h5
+                            style={{
+                                color: 'black',
+                                userSelect: 'none'
+                            }}>
+                            {currentPage}
+                        </h5>
+                    </div>
+                    <button className={s.paginadoButton} onClick={()=>nextPage()}>{`>`}</button>
                 </div>
                 <div className={s.container}>
                     {pokemonsFiltered.map(p => (
@@ -99,6 +106,19 @@ export default function Pokemons() {
                         />
                     ))}
                 </div>
+                <div className={s.paginadoInferiorContainer}>
+                    <button className={s.paginadoButton} onClick={() => prevPage()}>{`<`}</button>
+                    <div>
+                        <h5
+                            style={{
+                                color: 'black',
+                                userSelect: 'none'
+                            }}>
+                            {currentPage}
+                        </h5>
+                    </div>
+                    <button className={s.paginadoButton} onClick={()=>nextPage()}>{`>`}</button>
+                </div>                
             </div>
         )
     } else if (pokemons === null) {
@@ -107,9 +127,7 @@ export default function Pokemons() {
                 <div className={s.navBarContainer}>
                     <NavBar/>
                 </div>
-                <div className={s.paginadoContainer}>
-                    <Paginado/>
-                </div>
+                
                 <div className={s.container}>
                     <div className={s.warning}>El pokemon ingresado no se encuentra</div>
                 </div>

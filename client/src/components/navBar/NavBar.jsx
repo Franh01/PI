@@ -33,10 +33,12 @@ export default function NavBar() {
         dispatch(sortByType('todos'));
         setFilter('---');
         setOrderBy('---');
+        if (location.pathname === '/pokemons') {
+            window.location.reload()
+        }
     }
     //* FILTRO DE TIPO
     const [type, setType] = useState('todos');
-    const pokemons = useSelector((state) => state.pokemonReducer.pokemons)
     function typeFilterButton() {
         dispatch(sortByType(type))
         // console.log(pokemons.filter(t => t.tipos.find(p=>p.name === type)))
