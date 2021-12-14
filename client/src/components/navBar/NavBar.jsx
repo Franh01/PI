@@ -14,9 +14,6 @@ export default function NavBar() {
     if (tipos.length === 0) {
         dispatch(getTypes())
     };
-    let makeItem = function(x) {
-        return <option key={x}>{x}</option>;
-    };
     const [name, setName] = useState('');
     function handleOnSearch() {
         if (location.pathname.length > 10) {
@@ -80,8 +77,8 @@ export default function NavBar() {
                     </select>
 
                     <select className={s.fonting} value={type} onChange={(e) => setType(e.target.value)}>
-                        <option defaultValue>todos</option>
-                        {tipos.map(makeItem)}
+                        <option defaultValue>Todos</option>
+                        {tipos.map(t => <option value={t} key={t}>{t.charAt(0).toUpperCase()+t.slice(1)}</option>)}
                     </select>
                     <button className={s.fonting} onClick={() => typeFilterButton()}>Aplicar</button>
                 </div>
@@ -89,8 +86,8 @@ export default function NavBar() {
                 <div className={s.navComp}>
                     <select className={s.fonting} value={filter} onChange={(e)=> setFilter(e.target.value)}>
                         <option defaultValue>---</option>
-                        <option>name</option>
-                        <option>strength</option>
+                        <option value='name'>Nombre</option>
+                        <option value='strength'>Fuerza</option>
                     </select>
                     <select className={s.fonting}  value={orderBy} onChange={(e)=> setOrderBy(e.target.value)}>
                         <option defaultValue>---</option>

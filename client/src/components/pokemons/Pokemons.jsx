@@ -29,6 +29,10 @@ export default function Pokemons() {
         }
     }
 
+    useEffect(() => {
+        setPage(0)
+        setCurrentPage(1)
+    }, [userFilter])
     //* FILTRO DE CREADO O NO POR EL WACHIN
     if (pokemons !== null && pokemons.length > 1) {
         if (userFilter === 'Todos') {

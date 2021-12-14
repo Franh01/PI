@@ -50,22 +50,22 @@ export default function CreatePokemon() {
         if (hp.toString().includes('e') || strength.toString().includes('e') || defense.toString().includes('e') || speed.toString().includes('e') || height.toString().includes('e') || weight.toString().includes('e')) {
             return alert('Debes introducir estadisticas validas')
         }
-        if (hp === '') {
+        if (hp === '' || hp < 0) {
             setHp(0)
             return alert('La vida debe ser al menos 0')
-        } else if (strength === '') {
+        } else if (strength === '' || strength < 0) {
             setStrength(0)
             return alert('La fuerza debe ser al menos 0')
-        } else if (defense === '') {
+        } else if (defense === '' || defense < 0) {
             setDefense(0)
             return alert('La defensa debe ser al menos 0')
-        } else if (speed === '') {
+        } else if (speed === '' || speed < 0) {
             setSpeed(0)
             return alert('La velocidad debe ser al menos 0')
-        } else if (height === '') {
+        } else if (height === '' || height < 0) {
             setHeight(0)
             return alert('La altura debe ser al menos 0')
-        } else if (weight === '') {
+        } else if (weight === '' || weight < 0) {
             setWeight(0)
             return alert('El peso debe ser al menos 0')
         }
@@ -118,12 +118,12 @@ export default function CreatePokemon() {
                     <div className={s.typesContainer}>
                         <h4 className={s.type}>Tipo principal:</h4>
                         <select className={s.pokemonTypes} value={type1} multiple={false} onChange={e => { setType1(e.target.value) }}>
-                            {tipos.map(makeItem)}
+                        {tipos.map(t => <option value={t} key={t}>{t.charAt(0).toUpperCase()+t.slice(1)}</option>)}
                         </select>
                         <h4 className={s.type}>Tipo secundario:</h4>
                         <select className={s.pokemonTypes} value={type2} multiple={false} onChange={e => {setType2(e.target.value)}}>
                             <option defaultValue>none</option>
-                            {tipos.map(makeItem)}
+                            {tipos.map(t => <option value={t} key={t}>{t.charAt(0).toUpperCase()+t.slice(1)}</option>)}
                         </select>
                     </div>
 
