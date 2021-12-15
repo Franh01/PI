@@ -30,9 +30,6 @@ export default function CreatePokemon() {
     const [imgUrl, setImgUrl] = useState('');
     const [type1, setType1] = useState('normal');
     const [type2, setType2] = useState('none');
-    let makeItem = function(x) {
-        return <option key={x}>{x}</option>;
-    };
 
     function handleOnSubmit(e) {
 
@@ -72,7 +69,7 @@ export default function CreatePokemon() {
         if (name) {
             if (type2 === 'none') {
                 dispatch(createPokemon({
-                    name: name,
+                    name: name.toLowerCase(),
                     hp: hp,
                     strength: strength,
                     defense: defense,
@@ -84,7 +81,7 @@ export default function CreatePokemon() {
                 }))
             } else {
                 dispatch(createPokemon({
-                    name: name,
+                    name: name.toLowerCase(),
                     hp: hp,
                     strength: strength,
                     defense: defense,
@@ -118,11 +115,11 @@ export default function CreatePokemon() {
                     <div className={s.typesContainer}>
                         <h4 className={s.type}>Tipo principal:</h4>
                         <select className={s.pokemonTypes} value={type1} multiple={false} onChange={e => { setType1(e.target.value) }}>
-                        {tipos.map(t => <option value={t} key={t}>{t.charAt(0).toUpperCase()+t.slice(1)}</option>)}
+                            {tipos.map(t => <option value={t} key={t}>{t.charAt(0).toUpperCase()+t.slice(1)}</option>)}
                         </select>
                         <h4 className={s.type}>Tipo secundario:</h4>
                         <select className={s.pokemonTypes} value={type2} multiple={false} onChange={e => {setType2(e.target.value)}}>
-                            <option defaultValue>none</option>
+                            <option value='none' defaultValue>None</option>
                             {tipos.map(t => <option value={t} key={t}>{t.charAt(0).toUpperCase()+t.slice(1)}</option>)}
                         </select>
                     </div>

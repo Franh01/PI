@@ -29,6 +29,7 @@
 {
     max-width: 100%;
     filter: drop-shadow(20px 10px 8px #000) saturate(2);
+    max-height: 300px;
 }
 
 .content 

@@ -17,26 +17,26 @@ import rock from './rock.png';
 import steel from './steel.png';
 import water from './water.png';
 
-const pokeImgs = {
-    bug,
-    dark,
-    dragon,
-    electric,
-    fairy,
-    fighting,
-    fire,
-    flying,
-    ghost,
-    grass,
-    ground,
-    ice,
-    normal,
-    poison,
-    psychic,
-    rock,
-    steel,
-    water
-};
+const pokeImgs = [
+    { name: bug },
+    { name: dark },
+    { name: dragon },
+    { name: electric },
+    { name: fairy },
+    { name: fighting },
+    { name: fire },
+    { name: flying },
+    { name: ghost },
+    { name: grass },
+    { name: ground },
+    { name: ice },
+    { name: normal },
+    { name: poison },
+    { name: psychic },
+    { name: rock },
+    { name: steel },
+    { name: water },
+];
 
 export default pokeImgs;
 

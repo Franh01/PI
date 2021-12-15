@@ -18,20 +18,30 @@
     font-family: 'Press Start 2P';
 }
 
+.defaultImg 
+{
+        max-height: 258px;
+        filter: drop-shadow(20px 10px 8px #000) saturate(1.2) contrast(1) blur();
+        transition-duration: .5s;
+        transition-timing-function: cubic-bezier(.2,.42,1,1.11);
+        min-width: 475px;
+        min-height: 475px;
+}
+.defaultImg:hover
+{
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(0,1.08,1,.89);
+    transform: scale(1.03);
+}
+
 .image 
 {
         max-width: 100%;
         filter: drop-shadow(20px 10px 8px #000) saturate(2);
         transition-duration: .5s;
         transition-timing-function: cubic-bezier(.2,.42,1,1.11);
-}
-
-.defaultImg 
-{
-        max-height: 258px;
-        filter: drop-shadow(20px 10px 8px #000) saturate(2);
-        transition-duration: .5s;
-        transition-timing-function: cubic-bezier(.2,.42,1,1.11);
+        max-width: 475px;
+        max-height: 475px;
 }
 
 .image:hover 

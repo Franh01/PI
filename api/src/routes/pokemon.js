@@ -82,7 +82,7 @@ router.get('/pokemons/:id', async function (req, res) {
     if (name) {
         try {
             const pokemonSearch = await Pokemon.findOne({
-                where: { name: name },
+                where: { name: name.toLocaleLowerCase() },
                 include: { model: Tipo }
             });
             return res.json(pokemonSearch).status(200);
