@@ -4,6 +4,7 @@ import { useNavigate} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { createPokemon, getPokemons, getTypes } from '../../redux/actions/pokemon';
 import NavBar from '../navBar/NavBar';
+import defaultImg from '../../img/question2.png';
 
 export default function CreatePokemon() {
     const dispatch = useDispatch();
@@ -32,10 +33,14 @@ export default function CreatePokemon() {
     const [type2, setType2] = useState('none');
 
     function handleOnSubmit(e) {
-
+        e.preventDefault()
         if (pokemons.some(p => p === name)) {
             setName('');
             return alert('Ya existe un pokemon con ese nombre');
+        }
+        if (imgUrl.length > 255) {
+
+            return alert('URL de imagen invalido!')
         }
 
         e.preventDefault()        
@@ -98,9 +103,27 @@ export default function CreatePokemon() {
             return alert('Debes introducir parametros validos!')
         }
     }
-    
-    
-  
+
+    let previewFlag = false;
+    const [opacityImg, setOpacityImg] = useState('0%')
+    let inputWidth = '500px';
+    let inputBorder = '5px'
+    if (imgUrl.length > 0) {
+        inputWidth = '450px';
+        inputBorder = '5px 0px 0px 5px'
+        previewFlag = true;
+
+    }
+    function handleOnPreview() {
+        if (opacityImg === '100%') {
+            setOpacityImg('0%');
+        } else {
+            setOpacityImg('100%');
+        }
+    }
+    function addDefaultImg(e){
+        e.target.src = defaultImg;
+    }
     return (
         <div className={s.container}>
             <NavBar/>
@@ -125,10 +148,34 @@ export default function CreatePokemon() {
                     </div>
 
                     <div className={s.imgContainer}>
-                        <h4 className={s.titles} style={{marginBottom: '-5px', marginTop: '5px'}}>Imagen:</h4>
-                        <input className={s.inputs} type='text' placeholder='Img url...' value={imgUrl} onChange={e => {
-                            setImgUrl(e.target.value)
-                        }}></input>
+                        <h4 className={s.titles} style={{ marginBottom: '-5px', marginTop: '5px' }}>Imagen:</h4>
+                        <div className={s.inputAndPrev}>
+                            <div>
+                            <input
+                                className={s.inputs}
+                                type='text'
+                                placeholder='Img url...'
+                                value={imgUrl}
+                                    style={{
+                                        width: inputWidth,
+                                        borderRadius: inputBorder
+                                    }}
+                                onChange={e => {
+                                    setImgUrl(e.target.value)
+                                }}></input>
+                                </div>
+                            {previewFlag && <div className={s.previewContainer}><button type='button' className={s.previewButton} onClick={() => handleOnPreview()}>Preview</button></div>}
+                            <div className={s.previewImgContainer}>
+                                <img
+                                    className={s.previewImg}
+                                    src={imgUrl} alt="preview"
+                                    style={{ opacity: opacityImg }}
+                                    onError={(e) => addDefaultImg(e)}
+
+                                />
+                            </div>
+                            
+                        </div>
                     </div>
                     
                         <h4 className={s.type} style={{margin: '10px 0px -20px 0px'}}>Estadísticas:</h4>

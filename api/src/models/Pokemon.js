@@ -16,7 +16,7 @@ module.exports = (sequelize) => {
       unique: true
     },
     imgUrl: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: true
     },
     hp: {
