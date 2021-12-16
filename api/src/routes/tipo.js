@@ -39,7 +39,7 @@ const getTypeInfo = async () => {
 async function typeChecker() {
     try {
         const typesCheck = await Tipo.findAll();
-        if (typesCheck.length === 0) {
+        if (typesCheck.length < 5) {
             getTypeInfo()
         }
     } catch (e) {

@@ -14,9 +14,7 @@ describe('Tipo model', () => {
           .then(() => done(new Error('Debes introducir un nombre valido')))
           .catch(() => done());
       });
-      it('deberia funcionar con un nombre valido', () => {
-        Tipo.create({ name: 'electric' });
-      });
+      
     });
   });
 });

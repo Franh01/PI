@@ -1,30 +1,22 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import LadingPage from './LandingPage.jsx';
-// import App from '../../App';
+import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
+import LandingPage  from './LandingPage.jsx';
 
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
+test('Deberia contener el texto "Pokefinder"', () => {
+    render(<LandingPage />, { wrapper: MemoryRouter })
 
-describe('Landing page test', () => {
-    const initialState = { output: 10 };
-    const mockStore = configureStore();
-    let store;
+    expect(screen.getByText('Pokefinder'));
+})
 
-    it('Deberia contener el texto "Pokefinder"', () => {
-        store = mockStore(initialState);
-        const { getByText } = render(
-            <Provider store={store}>
-                <LadingPage />
-            </Provider>
-        );
+test('Deberia tener una imagen', () => {
+    render(<LandingPage />, { wrapper: MemoryRouter })
 
-        expect(getByText('Pokefinder')).not.toBeNull();
-    });
-});
+    expect(screen.getByRole('img'));
+})
 
-// test('Deberia tener una imagen', () => {
-//     render(<LandingPage />, { wrapper: MemoryRouter })
+test('Deberia tener una imagen con un alt "toPokemons"', () => {
+    render(<LandingPage />, { wrapper: MemoryRouter })
 
-//     expect(screen.getByRole('img')).toBeInTheDocument();
-// })
+    expect(screen.getByAltText('toPokemons'));
+})

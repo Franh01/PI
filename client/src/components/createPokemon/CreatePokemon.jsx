@@ -75,24 +75,24 @@ export default function CreatePokemon() {
             if (type2 === 'none') {
                 dispatch(createPokemon({
                     name: name.toLowerCase(),
-                    hp: hp,
-                    strength: strength,
-                    defense: defense,
-                    speed: speed,
-                    height: height,
-                    weight: weight,
+                    hp: Math.round(hp),
+                    strength: Math.round(strength),
+                    defense: Math.round(defense),
+                    speed: Math.round(speed),
+                    height: Math.round(height),
+                    weight: Math.round(weight),
                     imgUrl: imgUrl,
                     type: [type1]
                 }))
             } else {
                 dispatch(createPokemon({
                     name: name.toLowerCase(),
-                    hp: hp,
-                    strength: strength,
-                    defense: defense,
-                    speed: speed,
-                    height: height,
-                    weight: weight,
+                    hp: Math.round(hp),
+                    strength: Math.round(strength),
+                    defense: Math.round(defense),
+                    speed: Math.round(speed),
+                    height: Math.round(height),
+                    weight: Math.round(weight),
                     imgUrl: imgUrl,
                     type: [type1, type2]
                 }))
