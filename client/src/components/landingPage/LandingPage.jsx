@@ -1,4 +1,4 @@
-import s from './LandPage.module.css';
+import s from './LandingPage.module.css';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getPokemons, getTypes } from '../../redux/actions/pokemon';
