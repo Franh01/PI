@@ -36,7 +36,17 @@ const getTypeInfo = async () => {
             console.log(e)
         })
 }
-getTypeInfo()
+async function typeChecker() {
+    try {
+        const typesCheck = await Tipo.findAll();
+        if (typesCheck.length === 0) {
+            getTypeInfo()
+        }
+    } catch (e) {
+        console.log(e)
+    }
+}
+typeChecker()
 
 router.get('/types', async function (req, res) {
     try {

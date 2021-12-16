@@ -73,11 +73,17 @@ router.get('/pokemons/:id', async function (req, res) {
             console.log(e)
             res.json(`No existe un pokemon con el id ${id}`).status(404)
         }
-    });
+});
     
-    
-    router.get('/pokemons', async function (req, res) {
-    getApiInfo()
+router.get('/pokemons', async function (req, res) {
+    try {
+        const pokemonCheck = await Pokemon.findAll({})
+        if (pokemonCheck.length === 0) {
+            getApiInfo()
+        }
+    } catch (e) {
+        console.log(e)
+    }
     const { filter, orderBy, name } = req.query;
     if (name) {
         try {
