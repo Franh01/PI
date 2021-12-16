@@ -2,7 +2,7 @@ import s from './Pokemons.module.css';
 import PokemonCard from '../pokemonCard/PokemonCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { getPokemons } from '../../redux/actions/pokemon';
+import { getPokemons, getTypes } from '../../redux/actions/pokemon';
 import NavBar from '../navBar/NavBar';
 import Loading from '../loading/Loading'
 
@@ -12,9 +12,7 @@ export default function Pokemons() {
     let pokemonsFiltered = pokemons;
     const typeFilter = useSelector((state) => state.pokemonReducer.sortBy);
     const userFilter = useSelector((state) => state.pokemonReducer.sortByCreatedBy);
-    useEffect(() => {
-        dispatch(getPokemons(''))
-    }, [])
+    
 
     //* PAGINADO
     const [page, setPage] = useState(0);
@@ -37,6 +35,9 @@ export default function Pokemons() {
         setPage(0)
         setCurrentPage(1)
     }, [userFilter])
+    useEffect(() => {
+        dispatch(getPokemons(''))
+    }, [])
     if (pokemonsFiltered !== null) {
         if (pokemonsFiltered.length === 0) {
             return (
