@@ -12,10 +12,9 @@ export default function Pokemons() {
     let pokemonsFiltered = pokemons;
     const typeFilter = useSelector((state) => state.pokemonReducer.sortBy);
     const userFilter = useSelector((state) => state.pokemonReducer.sortByCreatedBy);
-    console.log(pokemons.length)
-    if (pokemons.length === 0) {
+    useEffect(() => {
         dispatch(getPokemons(''))
-    }
+    }, [])
 
     //* PAGINADO
     const [page, setPage] = useState(0);
@@ -38,9 +37,6 @@ export default function Pokemons() {
         setPage(0)
         setCurrentPage(1)
     }, [userFilter])
-    useEffect(() => {
-        dispatch(getPokemons(''))
-    }, [])
     if (pokemonsFiltered !== null) {
         if (pokemonsFiltered.length === 0) {
             return (

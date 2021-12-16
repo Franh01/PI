@@ -16,7 +16,7 @@ function App() {
         <Route path='/pokemons' element={<Pokemons />} />
         <Route path='/pokemons/:pokemonName' element={<PokemonFiltered/>}/>
         <Route path='/pokemons/createpokemon' element={<CreatePokemon />} />
-        <Route path='*' element={<Error />} />
+        <Route path='*' element={<Error/>} />
       </Routes>
     </div>
   );

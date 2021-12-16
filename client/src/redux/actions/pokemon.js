@@ -1,5 +1,5 @@
 //Actions
-import { CREATE_POKEMON, GET_POKEMONS, GET_TYPES, GET_POKEMONS_FILTERED, SORT_BY_TYPE, SORT_BY_CREATED_BY } from './actionTypes';
+import { CREATE_POKEMON, GET_POKEMONS, GET_TYPES, GET_POKEMONS_FILTERED, SORT_BY_TYPE, SORT_BY_CREATED_BY, DELETE_POKEMON_STATE } from './actionTypes';
 import axios from 'axios';
 
 export const getPokemons = (value) => {
@@ -68,5 +68,12 @@ export const sortByCreatedBy = (value) => {
     return {
         type: SORT_BY_CREATED_BY,
         payload: value
+    }
+}
+
+export const deletePokemonState = () => {
+    return {
+        type: DELETE_POKEMON_STATE,
+        payload: []
     }
 }
