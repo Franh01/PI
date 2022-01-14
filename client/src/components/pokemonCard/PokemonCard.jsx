@@ -52,6 +52,7 @@ export default function PokemonCard({ name, img, type }) {
     }
     
     let upperName = name.toUpperCase().slice(0, 1) + name.slice(1, name.length);
+    console.log(type)
     let upperType = type[0].toUpperCase().slice(0, 1) + type[0].slice(1, type[0].length);
     let upperType1 = '';
     if (type[1]) {

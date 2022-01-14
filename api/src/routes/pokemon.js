@@ -75,59 +75,61 @@ router.get('/pokemons/:id', async function (req, res) {
 });
     
 router.get('/pokemons', async function (req, res) {
-    try {
-        const pokemonCheck = await Pokemon.findAll({})
-        if (pokemonCheck.length === 0) {
-            getApiInfo()
-        }
-    } catch (e) {
-        console.log(e)
-    }
-    const { filter, orderBy, name } = req.query;
-    if (name) {
+    setTimeout(() => {
         try {
-            const { Op } = require("sequelize");
-            const pokemonSearch = await Pokemon.findAll({                
-                where: {
-                    name: {
-                        [Op.iLike]: `%${name}%`
+            const pokemonCheck = await Pokemon.findAll({})
+            if (pokemonCheck.length === 0) {
+                getApiInfo()
+            }
+        } catch (e) {
+            console.log(e)
+        }
+        const { filter, orderBy, name } = req.query;
+        if (name) {
+            try {
+                const { Op } = require("sequelize");
+                const pokemonSearch = await Pokemon.findAll({                
+                    where: {
+                        name: {
+                            [Op.iLike]: `%${name}%`
+                        }
+                    },
+                    include: { model: Tipo }
+                });
+                return res.json(pokemonSearch).status(200);
+            } catch (e) {
+                console.log(e)
+            }
+        }
+        if (filter && orderBy) {
+            try {
+                const pokemonNames = await Pokemon.findAll({
+                    order: [[filter, orderBy]],
+                    attributes: ['name', 'imgUrl', 'id'],
+                    include: {
+                        model: Tipo
                     }
-                },
-                include: { model: Tipo }
-            });
-            return res.json(pokemonSearch).status(200);
-        } catch (e) {
-            console.log(e)
+                });
+                
+                res.json(pokemonNames);
+            } catch (e) {
+                console.log(e)
+            }
+        } else {
+            try {
+                const pokemonNames = await Pokemon.findAll({
+                    attributes: ['name', 'imgUrl', 'id'],
+                    include: {
+                        model: Tipo
+                    }
+                });
+                
+                res.json(pokemonNames);
+            } catch (e) {
+                console.log(e)
+            }
         }
-    }
-    if (filter && orderBy) {
-        try {
-            const pokemonNames = await Pokemon.findAll({
-                order: [[filter, orderBy]],
-                attributes: ['name', 'imgUrl', 'id'],
-                include: {
-                    model: Tipo
-                }
-            });
-            
-            res.json(pokemonNames);
-        } catch (e) {
-            console.log(e)
-        }
-    } else {
-        try {
-            const pokemonNames = await Pokemon.findAll({
-                attributes: ['name', 'imgUrl', 'id'],
-                include: {
-                    model: Tipo
-                }
-            });
-            
-            res.json(pokemonNames);
-        } catch (e) {
-            console.log(e)
-        }
-    }
+    }, 1000);
 });
 
 
