@@ -1,9 +1,9 @@
-/* eslint-disable import/no-extraneous-dependencies */
 const session = require('supertest-session');
 const app = require('../../src/app.js');
 const { conn } = require('../../src/db.js');
 
 const agent = session(app);
+
 
 describe('Pokemon routes', () => {
   before(() => conn.authenticate()

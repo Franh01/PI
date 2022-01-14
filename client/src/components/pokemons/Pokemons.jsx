@@ -2,7 +2,7 @@ import s from './Pokemons.module.css';
 import PokemonCard from '../pokemonCard/PokemonCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { getPokemons, getTypes } from '../../redux/actions/pokemon';
+import { getPokemons } from '../../redux/actions/pokemon';
 import NavBar from '../navBar/NavBar';
 import Loading from '../loading/Loading'
 
@@ -40,6 +40,9 @@ export default function Pokemons() {
     }, [])
     if (pokemonsFiltered !== null) {
         if (pokemonsFiltered.length === 0) {
+            setTimeout(() => {
+                dispatch(getPokemons(''))
+            }, 1000);
             return (
                 <div>
                     <Loading/>
@@ -47,7 +50,7 @@ export default function Pokemons() {
             )
         }
     }
-    //* FILTRO DE CREADO O NO POR EL WACHIN
+    //* FILTRO DE CREADO O NO POR USER
     if (pokemons !== null && pokemons.length > 1) {
         if (userFilter === 'Todos') {
             pokemonsFiltered = pokemonsFiltered

@@ -1,10 +1,10 @@
 //Actions
-import { CREATE_POKEMON, GET_POKEMONS, GET_TYPES, GET_POKEMONS_FILTERED, SORT_BY_TYPE, SORT_BY_CREATED_BY, DELETE_POKEMON_STATE } from './actionTypes';
+import { CREATE_POKEMON, GET_POKEMONS, GET_TYPES, GET_POKEMONS_FILTERED, SORT_BY_TYPE, SORT_BY_CREATED_BY } from './actionTypes';
 import axios from 'axios';
 
 export const getPokemons = (value) => {
     return (dispatch) => {
-            axios.get(`http://localhost:3001/pokemons?name=${value}`)
+            axios.get(`/pokemons?name=${value}`)
             .then(r => r.data)
             .then(data => {
                 dispatch({
@@ -18,7 +18,7 @@ export const getPokemons = (value) => {
 export const getPokemonsFiltered = (filter, orderBy) => {
     console.log(filter, orderBy)
     return (dispatch) => {
-            axios.get(`http://localhost:3001/pokemons`, {params: {filter, orderBy}})
+            axios.get(`/pokemons`, {params: {filter, orderBy}})
             .then(r => r.data)
             .then(data => {
                 dispatch({
@@ -32,7 +32,7 @@ export const getPokemonsFiltered = (filter, orderBy) => {
 
 export const getTypes = () => {
     return (dispatch) => {
-            axios.get('http://localhost:3001/types')
+            axios.get('/types')
             .then(r => r.data)
             .then(data => {
                 dispatch({
@@ -45,14 +45,14 @@ export const getTypes = () => {
 
 export const createPokemon = ({name, hp, strength, defense, speed, height, weight, imgUrl, type}) => {
     return (dispatch) => {
-        axios.post('http://localhost:3001/pokemons', { name, hp, strength, defense, speed, height, weight, imgUrl, type })
+        axios.post('/pokemons', { name, hp, strength, defense, speed, height, weight, imgUrl, type })
             .then(() => {
                 dispatch({
                     type: CREATE_POKEMON
                 })
             })
             .then(() => {
-                axios.get('http://localhost:3001/pokemons')
+                axios.get('/pokemons')
             })
     }
 }
@@ -68,12 +68,5 @@ export const sortByCreatedBy = (value) => {
     return {
         type: SORT_BY_CREATED_BY,
         payload: value
-    }
-}
-
-export const deletePokemonState = () => {
-    return {
-        type: DELETE_POKEMON_STATE,
-        payload: []
     }
 }

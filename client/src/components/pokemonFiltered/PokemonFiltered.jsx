@@ -5,24 +5,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import defaultImg from '../../img/question2.png';
 import NavBar from '../navBar/NavBar';
 import { useNavigate, useParams } from 'react-router-dom';
-import { deletePokemonState, getPokemons } from '../../redux/actions/pokemon';
+import { getPokemons } from '../../redux/actions/pokemon';
 import Error from '../error404/Error';
 import Loading from '../loading/Loading';
-import { useEffect } from 'react';
 
 export default function PokemonFiltered() {
     const dispatch = useDispatch();
     const params = useParams();
     const pokeUrl = params.pokemonName;
-    const [color, setColor] = useState('#808080');
+    const navigate = useNavigate();
+    const [color, setColor] = useState('#808080'); 
     const [typeImg, setTypeImg] = useState('');
     const [typeImg1, setTypeImg1] = useState('');
-    useEffect(() => {
-        dispatch(getPokemons(pokeUrl))
-    }, [])
-    let pokemons = useSelector((data) => data.pokemonReducer.pokemons);
+    const pokemons = useSelector((data) => data.pokemonReducer.pokemons);
+
+
     
-    console.log(pokemons)
     if (pokemons === null) {
         return (
             <div>
@@ -30,21 +28,37 @@ export default function PokemonFiltered() {
             </div>
         )
     }
+
     if (pokemons.length > 1) {
-        pokemons = pokemons.find(p => p.name === pokeUrl)
-    }
-
-
-    
-    if (pokemons.length === 0) {
+        dispatch(getPokemons(pokeUrl))
         return (
             <div>
                 <Loading/>
             </div>
         )
-    } else {
-        const type = pokemons.tipos.map(p => p.name);
+    }
+    
+    if (pokemons.length === 0) {
+        dispatch(getPokemons(pokeUrl))
+        return (
+            <div>
+                <Loading/>
+            </div>
+        )
+    }
+    
+    if (pokemons === null) {
+        navigate('/pokemons')
+        alert('El pokemon ingresado no se encuentra')
 
+        return (
+            <div>
+                <Error/>
+            </div>
+        )
+    } else {
+        
+        const type = pokemons.tipos.map(p => p.name);
         const name = pokemons.name;
         const img = pokemons.imgUrl;
         
@@ -90,13 +104,15 @@ export default function PokemonFiltered() {
         
         let upperName = name.toUpperCase().slice(0, 1) + name.slice(1, name.length);
         
-        function addDefaultImg(e) {
+        function addDefaultImg(e){
             e.target.src = defaultImg;
         }
     
-        return (
+        return ( 
+            
+            
             <div className={s.realMain}>
-                <NavBar />
+                <NavBar/>
                 <div className={s.divMain}>
                     <div className={s.card} style={
                         {
@@ -116,21 +132,21 @@ export default function PokemonFiltered() {
                             </div>
     
                             <div className={s.imgContainer}>
-                                {img ? <img className={s.image} src={img} alt={name} onError={(e) => addDefaultImg(e)} /> : <img className={s.defaultImg} src={defaultImg} alt={name} />}
+                                {img?<img className={s.image} src={img} alt={name} onError={(e) => addDefaultImg(e)}/>:<img className={s.defaultImg} src={defaultImg} alt={name} />}
     
-                                <div className={s.dimensionesText}>
-                                    <h3>Dimensiones:</h3>
-                                    <h4>Altura: {pokemons.height}</h4>
-                                    <h4>Peso: {pokemons.weight}</h4>
-                                </div>
+                                    <div className={s.dimensionesText}>
+                                        <h3>Dimensiones:</h3>
+                                        <h4>Altura: {pokemons.height}</h4>
+                                        <h4>Peso: {pokemons.weight}</h4>                
+                                    </div>
                                 
     
-                                <div className={s.atributosText}>
-                                    <h3>Atributos:</h3>
-                                    <h4>Vida: {pokemons.hp}</h4>
-                                    <h4>Ataque: {pokemons.strength}</h4>
-                                    <h4>Defensa: {pokemons.defense}</h4>
-                                    <h4>Velocidad: {pokemons.speed}</h4>
+                                    <div className={s.atributosText}>
+                                        <h3>Atributos:</h3>
+                                        <h4>Vida: {pokemons.hp}</h4>
+                                        <h4>Ataque: {pokemons.strength}</h4>
+                                        <h4>Defensa: {pokemons.defense}</h4>
+                                        <h4>Velocidad: {pokemons.speed}</h4>
                                 </div>
                                 <div></div>
                                 <div></div>
@@ -139,7 +155,7 @@ export default function PokemonFiltered() {
                             <div className={s.typeContainer}>
                                 {
                                     type.length === 1 ?
-                                        <div className={s.activador}>
+                                        <div className={s.activador}>   
                                             <div className={s.toolTip}>
                                                 <h4>{`${type[0]}`}</h4>
                                             </div>
@@ -175,6 +191,5 @@ export default function PokemonFiltered() {
                 </div>
             </div>
         )
-    
     }
 };

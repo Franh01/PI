@@ -1,4 +1,4 @@
-import { DELETE_POKEMON_STATE, GET_POKEMONS, GET_POKEMONS_FILTERED, GET_TYPES, SORT_BY_CREATED_BY, SORT_BY_TYPE } from '../actions/actionTypes';
+import { GET_POKEMONS, GET_POKEMONS_FILTERED, GET_TYPES, SORT_BY_CREATED_BY, SORT_BY_TYPE } from '../actions/actionTypes';
 
 const initialState = {    
     pokemons: [],
@@ -34,11 +34,6 @@ const postsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 sortByCreatedBy: payload
-            }
-        case DELETE_POKEMON_STATE:
-            return {
-                ...state,
-                pokemons: payload
             }
         default:
             return state;

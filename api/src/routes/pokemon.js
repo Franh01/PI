@@ -62,6 +62,7 @@ const getApiInfo = async () => {
 
 router.get('/pokemons/:id', async function (req, res) {
     const { id } = req.params;
+    console.log(id)
         try {
             const pokemonSearch = await Pokemon.findOne({
                 where: { id: id },
@@ -72,28 +73,31 @@ router.get('/pokemons/:id', async function (req, res) {
             console.log(e)
         }
 });
-    //! Agrega pokemons si no hay
+    
 router.get('/pokemons', async function (req, res) {
     try {
         const pokemonCheck = await Pokemon.findAll({})
-        if (pokemonCheck.length < 30) {
+        if (pokemonCheck.length === 0) {
             getApiInfo()
         }
     } catch (e) {
         console.log(e)
     }
-    //!
     const { filter, orderBy, name } = req.query;
     if (name) {
         try {
-            const pokemonSearch = await Pokemon.findOne({
-                where: { name: name },
+            const { Op } = require("sequelize");
+            const pokemonSearch = await Pokemon.findAll({                
+                where: {
+                    name: {
+                        [Op.iLike]: `%${name}%`
+                    }
+                },
                 include: { model: Tipo }
             });
-            res.json(pokemonSearch).status(200);
+            return res.json(pokemonSearch).status(200);
         } catch (e) {
             console.log(e)
-            
         }
     }
     if (filter && orderBy) {

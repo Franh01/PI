@@ -3,11 +3,8 @@ import s from './PokemonCard.module.css';
 import * as allImages from '../../img/pokeImages'
 import { useNavigate } from 'react-router-dom';
 import defaultImg from '../../img/question2.png';
-import { useDispatch } from 'react-redux';
-import { getPokemons } from '../../redux/actions/pokemon';
 
 export default function PokemonCard({ name, img, type }) {
-    const dispatch = useDispatch();
     const navigate = useNavigate();
     const bugC = '#3c9950';
     const darkC = '#040707';
@@ -62,10 +59,10 @@ export default function PokemonCard({ name, img, type }) {
     }
 
     function handleOnClick() {
-        // dispatch(getPokemons(name))
         setTimeout(() => {
             navigate(`/pokemons/${name}`)
-        }, 20);
+            
+        }, 200);
     }
     function addDefaultImg(e){
         e.target.src = defaultImg;

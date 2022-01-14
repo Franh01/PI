@@ -1,4 +1,5 @@
 const { Tipo, conn } = require('../../src/db.js');
+const { expect } = require('chai');
 
 describe('Tipo model', () => {
   before(() => conn.authenticate()
