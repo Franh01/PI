@@ -14,6 +14,7 @@ export default function NavBar() {
     if (tipos.length === 0) {
         dispatch(getTypes())
     };
+    
     const [name, setName] = useState('');
     function handleOnSearch() {
         if (location.pathname.length > 10) {

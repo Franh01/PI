@@ -42,7 +42,7 @@ export default function Pokemons() {
         if (pokemonsFiltered.length === 0) {
             setTimeout(() => {
                 dispatch(getPokemons(''))
-            }, 1000);
+            }, 4000);
             return (
                 <div>
                     <Loading/>
