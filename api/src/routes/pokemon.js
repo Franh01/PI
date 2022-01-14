@@ -77,7 +77,7 @@ router.get('/pokemons/:id', async function (req, res) {
 router.get('/pokemons', async function (req, res) {
     setTimeout(() => {
         try {
-            const pokemonCheck = await Pokemon.findAll({})
+            const pokemonCheck =  Pokemon.findAll({})
             if (pokemonCheck.length === 0) {
                 getApiInfo()
             }
@@ -88,7 +88,7 @@ router.get('/pokemons', async function (req, res) {
         if (name) {
             try {
                 const { Op } = require("sequelize");
-                const pokemonSearch = await Pokemon.findAll({                
+                const pokemonSearch =  Pokemon.findAll({                
                     where: {
                         name: {
                             [Op.iLike]: `%${name}%`
@@ -103,7 +103,7 @@ router.get('/pokemons', async function (req, res) {
         }
         if (filter && orderBy) {
             try {
-                const pokemonNames = await Pokemon.findAll({
+                const pokemonNames =  Pokemon.findAll({
                     order: [[filter, orderBy]],
                     attributes: ['name', 'imgUrl', 'id'],
                     include: {
@@ -117,7 +117,7 @@ router.get('/pokemons', async function (req, res) {
             }
         } else {
             try {
-                const pokemonNames = await Pokemon.findAll({
+                const pokemonNames =  Pokemon.findAll({
                     attributes: ['name', 'imgUrl', 'id'],
                     include: {
                         model: Tipo
