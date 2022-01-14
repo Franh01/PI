@@ -9,6 +9,7 @@ import Loading from '../loading/Loading'
 export default function Pokemons() {
     const dispatch = useDispatch()
     const pokemons = useSelector((state) => state.pokemonReducer.pokemons);
+    const tipos = useSelector((state) => state.pokemonReducer.types);
     let pokemonsFiltered = pokemons;
     const typeFilter = useSelector((state) => state.pokemonReducer.sortBy);
     const userFilter = useSelector((state) => state.pokemonReducer.sortByCreatedBy);
@@ -42,8 +43,10 @@ export default function Pokemons() {
     useEffect(() => {
         dispatch(getPokemons(''))
     }, [])
+    console.log(tipos)
+    console.log(pokemonsFiltered)
     if (pokemonsFiltered !== null) {
-        if (pokemonsFiltered.length === 0) {
+        if (pokemonsFiltered.length === 0 || tipos.length === 0) {
             return (
                 <div>
                     <Loading/>
