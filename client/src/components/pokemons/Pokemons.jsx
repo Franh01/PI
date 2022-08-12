@@ -113,7 +113,8 @@ export default function Pokemons() {
             key={pokemons.id}
             name={pokemons.name}
             img={pokemons.imgUrl}
-            type={pokemons.tipos.map((p) => p.name)}
+            // type={pokemons.tipos.map((p) => p.name)}
+            type={["grass"]}
           />
         </div>
       </div>
