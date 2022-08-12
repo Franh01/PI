@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { getPokemons, getTypes } from "../../redux/actions/pokemon";
 import NavBar from "../navBar/NavBar";
 import Loading from "../loading/Loading";
+import Error from "../error404/Error";
 
 export default function Pokemons() {
   const dispatch = useDispatch();
@@ -43,13 +44,19 @@ export default function Pokemons() {
   useEffect(() => {
     dispatch(getPokemons(""));
   }, []);
-  console.log(tipos);
-  console.log(pokemonsFiltered);
+  // console.log(tipos);
+  // console.log(pokemonsFiltered);
   if (pokemonsFiltered !== null) {
     if (pokemonsFiltered.length === 0 || tipos.length === 0) {
       return (
         <div>
-          <Loading />
+          <NavBar />
+          <h3
+            className={s.notFound}
+            style={{ marginTop: "5%", marginLeft: "2%", color: "black" }}
+          >
+            El pokemon ingresado no se encuentra, intenta con otro nombre!
+          </h3>
         </div>
       );
     }
