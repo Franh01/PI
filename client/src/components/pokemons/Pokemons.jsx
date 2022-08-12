@@ -149,18 +149,20 @@ export default function Pokemons() {
         ) : (
           <span style={{ display: "none" }} />
         )}
-        {tipos.length > 0 ? (
-          <div className={s.container}>
-            {pokemonsFiltered.map((p) => (
-              <PokemonCard
-                key={p.id}
-                name={p.name}
-                img={p.imgUrl}
-                type={p.tipos?.map((p) => p.name)}
-              />
-            ))}
-          </div>
-        ) : null}
+        <div className={s.container}>
+          {pokemonsFiltered.map((p) => (
+            <PokemonCard
+              key={p.id}
+              name={p.name}
+              img={p.imgUrl}
+              // type={p.tipos?.map((p) => p.name)}
+              type={["grass"]}
+            />
+          ))}
+        </div>
+        {/* {tipos.length > 0 ? (
+          
+        ) : null} */}
       </div>
     );
   }
