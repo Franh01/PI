@@ -17,7 +17,7 @@ export default function PokemonFiltered() {
   const [color, setColor] = useState("#808080");
   const [typeImg, setTypeImg] = useState("");
   const [typeImg1, setTypeImg1] = useState("");
-  const pokemons = useSelector((data) => data.pokemonReducer.pokemons);
+  const pokemons = useSelector((data) => data.pokemonReducer.pokemons[0]);
 
   if (pokemons === null) {
     return (
