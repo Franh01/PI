@@ -104,22 +104,31 @@ export default function PokemonFiltered() {
     ); //!solo nombres
     const variablesImg = allImages.default.map((p) => p.name);
 
-    for (let i = 0; i < nombres.length; i++) {
-      if (type[0] === nombres[i] && color !== variables[i]) {
-        setColor(variables[i]);
-        setTypeImg(variablesImg[i]);
-      }
-    }
-
-    if (type[1]) {
+    if (pokemons.id === undefined) {
+      return (
+        <div>
+          <Loading />
+        </div>
+      );
+    } else {
       for (let i = 0; i < nombres.length; i++) {
-        if (type[1] === nombres[i] && typeImg1 !== variablesImg[i]) {
-          setTypeImg1(variablesImg[i]);
+        if (type[0] === nombres[i] && color !== variables[i]) {
+          setColor(variables[i]);
+          setTypeImg(variablesImg[i]);
         }
       }
-    }
 
-    let upperName = name.toUpperCase().slice(0, 1) + name.slice(1, name.length);
+      if (type[1]) {
+        for (let i = 0; i < nombres.length; i++) {
+          if (type[1] === nombres[i] && typeImg1 !== variablesImg[i]) {
+            setTypeImg1(variablesImg[i]);
+          }
+        }
+      }
+
+      let upperName =
+        name.toUpperCase().slice(0, 1) + name.slice(1, name.length);
+    }
 
     function addDefaultImg(e) {
       e.target.src = defaultImg;
