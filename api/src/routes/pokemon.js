@@ -35,27 +35,55 @@ const getApiInfo = async () => {
         })
       );
 
-      resultados.map((r) =>
-        await Pokemon.create({
-          name: r.name,
-          height: r.height,
-          weight: r.weight,
-          imgUrl: r.img,
-          hp: r.hp,
-          strength: r.strength,
-          defense: r.defense,
-          speed: r.speed,
-          id: r.pokemonId,
-          createdByUser: false,
-        })
-          .then((create) => {
-            await create.setTipos(r.types);
+      //   resultados.map((r) =>
+      //     Pokemon.create({
+      //       name: r.name,
+      //       height: r.height,
+      //       weight: r.weight,
+      //       imgUrl: r.img,
+      //       hp: r.hp,
+      //       strength: r.strength,
+      //       defense: r.defense,
+      //       speed: r.speed,
+      //       id: r.pokemonId,
+      //       createdByUser: false,
+      //     })
+      //       .then((create) => {
+      //         create.setTipos(r.types);
+      //       })
+      //       .catch((e) => {
+      //         console.log("ERROR!!");
+      //         console.log(e);
+      //       })
+      //   );
+
+      resultados.map((r) => {
+        console.log(
+          r.types.map((t) => {
+            return { name: t };
           })
-          .catch((e) => {
-            console.log("ERROR!!");
-            console.log(e);
-          })
-      );
+        );
+        Pokemon.create(
+          {
+            name: r.name,
+            height: r.height,
+            weight: r.weight,
+            imgUrl: r.img,
+            hp: r.hp,
+            strength: r.strength,
+            defense: r.defense,
+            speed: r.speed,
+            id: r.pokemonId,
+            createdByUser: false,
+            tipos: r.types.map((t) => {
+              return { name: t };
+            }),
+          },
+          {
+            include: [Tipo],
+          }
+        );
+      });
 
       return resultados;
     })
