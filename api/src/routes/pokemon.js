@@ -36,7 +36,7 @@ const getApiInfo = async () => {
       );
 
       resultados.map((r) =>
-        Pokemon.create({
+        await Pokemon.create({
           name: r.name,
           height: r.height,
           weight: r.weight,
@@ -49,7 +49,7 @@ const getApiInfo = async () => {
           createdByUser: false,
         })
           .then((create) => {
-            create.setTipos(r.types);
+            await create.setTipos(r.types);
           })
           .catch((e) => {
             console.log("ERROR!!");
